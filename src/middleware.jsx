@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { FORGOT_PASSWORD, LOGIN_URL, SIGNUP_URL, HOME_URL } from '@/app/api/routes/page';
+import { FORGOT_PASSWORD, LOGIN_URL, SIGNUP_URL, HOME_URL } from '@/app/api/routes/route';
 
 export function middleware(request) {
 //   const path = request.nextUrl.pathname;

@@ -25,7 +25,7 @@ import {
   LOGO_IMAGE_URL,
   GOOGLE_LOGO,
   PHONE_NUMBER_LOGO,
-} from "@/app/api/redirection_route/page";
+} from "@/app/api/redirection_route/route";
 
 // firebase import
 import { auth, db } from "@/db/firebase";

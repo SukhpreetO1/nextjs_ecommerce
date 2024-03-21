@@ -47,3 +47,12 @@ In order to stop calling routes 2 times when add "use client", then change the n
 
 To read the data from token, 
     npm install jsonwebtoken
+
+To 
+    npm install axios
+
+To send the mail 
+    npm install nodemailer
+    
+To connect the front end with database
+    npm install mongoose

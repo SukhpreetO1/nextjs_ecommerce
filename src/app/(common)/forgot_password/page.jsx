@@ -1,6 +1,6 @@
 "use client";
 
-import { InputField, LOGIN_URL, Link, SubmitButton, useRouter, useState, validate_forgot_password_submit_form, sendPasswordResetEmail, auth, toast, ToastContainer } from "@/app/api/routes/page";
+import { InputField, LOGIN_URL, Link, SubmitButton, useRouter, useState, validate_forgot_password_submit_form, sendPasswordResetEmail, auth, toast, ToastContainer } from "@/app/api/routes/route";
 
 const ForgotPassword = () => {
   const router = useRouter();
