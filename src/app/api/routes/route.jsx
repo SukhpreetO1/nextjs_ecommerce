@@ -57,6 +57,13 @@ import bcrypt, { hash } from "bcryptjs";
 // use for jwt
 import jwt from "jsonwebtoken";
 
+// import mongoose database
+import mongoose from "mongoose";
+
+import { connect } from "@/db/mongoDB"
+import User from "@/modals/users";
+import { NextRequest, NextResponse } from "next/server";
+
 export {
   Link,
   React,
@@ -108,5 +115,11 @@ export {
   bcrypt,
   hash,
 
-  jwt
+  jwt,
+
+  mongoose,
+  connect,
+  User,
+  NextRequest, 
+  NextResponse
 };
