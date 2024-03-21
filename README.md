@@ -26,7 +26,7 @@ To read the env file, fotenv package is used
     npm install dotenv
 
 To add the notification, 
-    npm install --save react-toastify
+    npm install react-toastify
 
 To use the font awesome,
     npm i --save @fortawesome/fontawesome-svg-core
