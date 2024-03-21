@@ -1,5 +1,5 @@
 "use client";
-import { React, useState, InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, ToastContainer, useRouter, hash, collection, query, where, getDocs, addDoc, serverTimestamp, db, auth, createUserWithEmailAndPassword, onAuthStateChanged, getAuth } from '@/app/api/routes/page';
+import { React, useState, InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, ToastContainer, useRouter, hash, db, auth, createUserWithEmailAndPassword, onAuthStateChanged, getAuth } from '@/app/api/routes/page';
 
 const genderOptions = [
     { label: 'Male', value: '1' },
@@ -50,12 +50,12 @@ const Signup = () => {
         handleFieldChange('hobbies', selectedHobbies);
     };
 
-    // checking the unique value
-    const checkUniqueFields = async (field, value) => {
-        const q = query(collection(db, 'users'), where(field, '==', value));
-        const querySnapshot = await getDocs(q);
-        return querySnapshot.empty;
-    };
+    // // checking the unique value
+    // const checkUniqueFields = async (field, value) => {
+    //     const q = query(collection(db, 'users'), where(field, '==', value));
+    //     const querySnapshot = await getDocs(q);
+    //     return querySnapshot.empty;
+    // };
 
     const formSubmit = async (e) => {
         e.preventDefault();
@@ -98,10 +98,10 @@ const Signup = () => {
                 role_id: Number(1),
                 hobbies: hobbiesArray,
                 password: String(hashedPassword),
-                created_at: serverTimestamp(),
-                updated_at: serverTimestamp()
+                // created_at: serverTimestamp(),
+                // updated_at: serverTimestamp()
             };
-            await addDoc(collection(db, 'users'), user_data);
+            // await addDoc(collection(db, 'users'), user_data);
 
             localStorage.setItem("hasShownAccountCreatedToast", false);
 
