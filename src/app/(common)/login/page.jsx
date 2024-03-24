@@ -7,6 +7,8 @@ const Login = () => {
 
   const [errors, setErrors] = useState({});
 
+  const [buttonDisabled, setButtonDisabled] = useState(false)
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -43,15 +45,15 @@ const Login = () => {
     const validation_errors = validate_login_submit_form(formData);
     if (Object.keys(validation_errors).length === 0) {
       try {
+        setButtonDisabled(true);
         await signInWithEmailAndPassword(auth, formData.email, formData.password);
         const response = await axios.post('/api/users/login', formData);
         localStorage.setItem("hasShownLoginToast", false);
         // router.push(NAVBAR_DASHBOARD);
-        toast.error("Invalid credential", {
-          position: "top-right",
-        });
+        setButtonDisabled(false);
       }
       catch (err) {
+        setButtonDisabled(false);
         toast.error("Invalid credential", {
           position: "top-right",
         });
@@ -72,7 +74,7 @@ const Login = () => {
       });
       localStorage.setItem("hasShownLoginToast", false);
       router.push(NAVBAR_DASHBOARD);
-    } catch (err){
+    } catch (err) {
       console.log(err);
     }
   }
@@ -101,7 +103,7 @@ const Login = () => {
                 <Link href={FORGOT_PASSWORD} className="forgot_password_link">Forgot Password?</Link>
               </div>
               <div className="login_button">
-                <SubmitButton className="login_submit_button" id="login_submit_button" name="login_submit_button" div_name="login_submit_button" label="Login" />
+                <SubmitButton className="login_submit_button" id="login_submit_button" name="login_submit_button" div_name="login_submit_button" label="Login" disabled={buttonDisabled}/>
               </div>
             </form>
             <div>
@@ -111,10 +113,10 @@ const Login = () => {
               <div>Other ways to login :
                 <div className='flex justify-center mt-4'>
                   <div className="google_autherization cursor-pointer">
-                    <Image src={GOOGLE_LOGO} width={50} height={50} alt="google_logo" className='w-8 h-8 me-3 rounded-lg' onClick={() => signInWithGoogle()}/>
+                    <Image src={GOOGLE_LOGO} width={50} height={50} alt="google_logo" className='w-8 h-8 me-3 rounded-lg' onClick={() => signInWithGoogle()} />
                   </div>
                   <div className="phone_number_autherization cursor-pointer">
-                    <Image src={PHONE_NUMBER_LOGO} width={50} height={50} alt="google_logo" className='w-8 h-8 me-3 rounded-lg' onClick={() => signInWithPhone()}/>
+                    <Image src={PHONE_NUMBER_LOGO} width={50} height={50} alt="google_logo" className='w-8 h-8 me-3 rounded-lg' onClick={() => signInWithPhone()} />
                   </div>
                 </div>
               </div>
