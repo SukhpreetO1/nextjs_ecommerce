@@ -1,5 +1,6 @@
 "use client";
-import { React, useState, InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, ToastContainer, Cookies, useEffect, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider } from '@/app/api/routes/route';
+import { InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, ToastContainer, Cookies, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider } from '@/app/api/routes/route';
+import React, { useState, useEffect } from 'react';
 
 const Login = () => {
   const router = useRouter();
@@ -49,7 +50,7 @@ const Login = () => {
           Cookies.set('currentUserToken', JSON.stringify(auth.currentUser.accessToken), {
             expires: expirationTime
           });
-          localStorage.setItem("hasShownLoginToast", false);
+          // localStorage.setItem("hasShownLoginToast", false);
           // router.push(NAVBAR_DASHBOARD);
         } else {
           toast.error("Login failed. Please try again.", {
@@ -77,7 +78,7 @@ const Login = () => {
       Cookies.set('currentUserToken', JSON.stringify(auth.currentUser.accessToken), {
         expires: expirationTime
       });
-      localStorage.setItem("hasShownLoginToast", false);
+      // localStorage.setItem("hasShownLoginToast", false);
       // router.push(NAVBAR_DASHBOARD);
     } catch (err){
       console.log(err);

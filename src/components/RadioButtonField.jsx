@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+"use client";
+import React, { useState } from "react";
 
 const RadioButtonField = ({ label_heading, div_name, options, onSelect, className, error, setError }) => {
     const [gender, setGender] = useState(null);

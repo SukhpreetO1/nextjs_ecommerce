@@ -1,4 +1,4 @@
-import mongoose from "@/app/api/routes/route"
+import { mongoose } from "@/app/api/routes/route";
 
 const userSchema = new mongoose.Schema({
     first_name: {
@@ -20,8 +20,7 @@ const userSchema = new mongoose.Schema({
         unique: true,
     },
     role_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Roles',
+        type: Number,
         default: 3,
     },
     date_of_birth: {
@@ -38,7 +37,7 @@ const userSchema = new mongoose.Schema({
         require: [true, 'Gender is required'],
     },
     hobbies: {
-        type: Array,
+        type: [String],
         require: [true, 'Hobby is required'],
     },
     password: {
@@ -57,6 +56,6 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-const User = mongoose.models.users || mongoose.model("users", userSchema);
+const User = mongoose.models && mongoose.models.users ? mongoose.models.users : mongoose.model("users", userSchema);
 
 export default User;

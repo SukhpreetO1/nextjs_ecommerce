@@ -1,5 +1,6 @@
 "use client";
-import { React, useState, InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, ToastContainer, useRouter, hash, db, auth, createUserWithEmailAndPassword, onAuthStateChanged, getAuth } from '@/app/api/routes/route';
+import { InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, ToastContainer, useRouter, auth, createUserWithEmailAndPassword, onAuthStateChanged, getAuth, axios } from '@/app/api/routes/route';
+import React, { useState } from 'react';
 
 const genderOptions = [
     { label: 'Male', value: '1' },
@@ -50,13 +51,6 @@ const Signup = () => {
         handleFieldChange('hobbies', selectedHobbies);
     };
 
-    // // checking the unique value
-    // const checkUniqueFields = async (field, value) => {
-    //     const q = query(collection(db, 'users'), where(field, '==', value));
-    //     const querySnapshot = await getDocs(q);
-    //     return querySnapshot.empty;
-    // };
-
     const formSubmit = async (e) => {
         e.preventDefault();
         const validation_errors = validate_signup_submit_form(formData);
@@ -69,13 +63,6 @@ const Signup = () => {
         const fieldsToCheck = ['email', 'username', 'mobile_number'];
         const uniqueErrors = {};
 
-        await Promise.all(fieldsToCheck.map(async (field) => {
-            const isUnique = await checkUniqueFields(field, formData[field].trim());
-            if (!isUnique) {
-                uniqueErrors[field] = `${field === 'mobile_number' ? 'Mobile number' : field.charAt(0).toUpperCase() + field.slice(1)} is already registered`;
-            }
-        }));
-
         if (Object.keys(uniqueErrors).length > 0) {
             setErrors({ ...validation_errors, ...uniqueErrors });
             return;
@@ -83,28 +70,9 @@ const Signup = () => {
 
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-            const hashedPassword = await hash(formData.password, 10);
-            const { confirm_password, ...userData } = formData;
-            const hobbiesArray = Array.isArray(formData.hobbies) ? formData.hobbies : [formData.hobbies];
-
-            const user_data = {
-                first_name: String(formData.first_name.trim()),
-                last_name: String(formData.last_name.trim()),
-                email: String(formData.email.trim()),
-                username: String(formData.username.trim()),
-                date_of_birth: String(formData.date_of_birth.trim()),
-                mobile_number: Number(formData.mobile_number.trim()),
-                gender: Number(formData.gender),
-                role_id: Number(1),
-                hobbies: hobbiesArray,
-                password: String(hashedPassword),
-                // created_at: serverTimestamp(),
-                // updated_at: serverTimestamp()
-            };
-            // await addDoc(collection(db, 'users'), user_data);
-
+            const response = await axios.post('/api/users/signup', formData);
+            toast.success(response.data.message, { position: 'top-right' });
             localStorage.setItem("hasShownAccountCreatedToast", false);
-
             router.push(LOGIN_URL);
         } catch (error) {
             const errorCode = error.code;

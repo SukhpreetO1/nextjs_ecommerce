@@ -56,3 +56,4 @@ To send the mail
     
 To connect the front end with database
     npm install mongoose
+    npm install aws4

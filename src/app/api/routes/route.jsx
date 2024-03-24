@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 
@@ -61,14 +60,12 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
 import { connect } from "@/db/mongoDB"
-import User from "@/modals/users";
 import { NextRequest, NextResponse } from "next/server";
+import axios from "axios";
+import User from "@/modals/users";
 
 export {
   Link,
-  React,
-  useState,
-  useEffect,
   useRouter,
   usePathname,
   Image,
@@ -119,7 +116,8 @@ export {
 
   mongoose,
   connect,
-  User,
   NextRequest, 
-  NextResponse
+  NextResponse,
+  axios,
+  User,
 };
