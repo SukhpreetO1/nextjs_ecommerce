@@ -60,14 +60,6 @@ const Signup = () => {
             return;
         }
 
-        const fieldsToCheck = ['email', 'username', 'mobile_number'];
-        const uniqueErrors = {};
-
-        if (Object.keys(uniqueErrors).length > 0) {
-            setErrors({ ...validation_errors, ...uniqueErrors });
-            return;
-        }
-
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
             const response = await axios.post('/api/users/signup', formData);

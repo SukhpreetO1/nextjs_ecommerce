@@ -1,5 +1,5 @@
 "use client";
-import { InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, ToastContainer, Cookies, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider } from '@/app/api/routes/route';
+import { InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, ToastContainer, Cookies, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider, axios } from '@/app/api/routes/route';
 import React, { useState, useEffect } from 'react';
 
 const Login = () => {
@@ -41,25 +41,17 @@ const Login = () => {
   const loginFormSubmit = async (e) => {
     e.preventDefault();
     const validation_errors = validate_login_submit_form(formData);
-    const expirationTime = new Date();
-    expirationTime.setTime(expirationTime.getTime() + 10 * 60 * 1000);
     if (Object.keys(validation_errors).length === 0) {
       try {
         await signInWithEmailAndPassword(auth, formData.email, formData.password);
-        if (auth.currentUser.email === formData.email) {
-          Cookies.set('currentUserToken', JSON.stringify(auth.currentUser.accessToken), {
-            expires: expirationTime
-          });
-          // localStorage.setItem("hasShownLoginToast", false);
-          // router.push(NAVBAR_DASHBOARD);
-        } else {
-          toast.error("Login failed. Please try again.", {
-            position: "top-right",
-          });
-        }
+        const response = await axios.post('/api/users/login', formData);
+        localStorage.setItem("hasShownLoginToast", false);
+        // router.push(NAVBAR_DASHBOARD);
+        toast.error("Invalid credential", {
+          position: "top-right",
+        });
       }
       catch (err) {
-        console.log(err);
         toast.error("Invalid credential", {
           position: "top-right",
         });
@@ -78,8 +70,8 @@ const Login = () => {
       Cookies.set('currentUserToken', JSON.stringify(auth.currentUser.accessToken), {
         expires: expirationTime
       });
-      // localStorage.setItem("hasShownLoginToast", false);
-      // router.push(NAVBAR_DASHBOARD);
+      localStorage.setItem("hasShownLoginToast", false);
+      router.push(NAVBAR_DASHBOARD);
     } catch (err){
       console.log(err);
     }
