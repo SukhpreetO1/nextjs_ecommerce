@@ -1,9 +1,6 @@
-import mongoose from "@/app/api/routes/route"
+import { mongoose } from "@/app/api/routes/route"
 
 const roleSchema = new mongoose.Schema({
-    _id: {
-        type: String,
-    },
     name: {
         type: String,
         require: [true, 'Role name is required'],
@@ -17,8 +14,8 @@ const roleSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-})
+});
 
-const Roles = mongoose.models.roles || mongoose.model("roles", roleSchema);
+const Roles = mongoose.models && mongoose.models.roles ? mongoose.models.roles : mongoose.model("roles", roleSchema);
 
 export default Roles;

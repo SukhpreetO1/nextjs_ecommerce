@@ -1,5 +1,5 @@
 "use client";
-import { InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, ToastContainer, Cookies, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider, axios } from '@/app/api/routes/route';
+import { InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, ToastContainer, Cookies, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider, axios, jwt } from '@/app/api/routes/route';
 import React, { useState, useEffect } from 'react';
 
 const Login = () => {
@@ -48,8 +48,7 @@ const Login = () => {
         setButtonDisabled(true);
         await signInWithEmailAndPassword(auth, formData.email, formData.password);
         const response = await axios.post('/api/users/login', formData);
-        localStorage.setItem("hasShownLoginToast", false);
-        // router.push(NAVBAR_DASHBOARD);
+        router.push(response.data.redirectUrl);
         setButtonDisabled(false);
       }
       catch (err) {

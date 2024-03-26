@@ -24,6 +24,8 @@ import {
   LOGO_IMAGE_URL,
   GOOGLE_LOGO,
   PHONE_NUMBER_LOGO,
+  USER_DASHBOARD, 
+  ADMIN_DASHBOARD
 } from "@/app/api/redirection_route/route";
 
 // firebase import
@@ -62,6 +64,9 @@ import mongoose from "mongoose";
 import { connect } from "@/db/mongoDB"
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
+
+// modal redirection 
+import Roles from "@/modals/roles";
 import User from "@/modals/users";
 
 export {
@@ -88,6 +93,8 @@ export {
   LOGO_IMAGE_URL,
   GOOGLE_LOGO,
   PHONE_NUMBER_LOGO,
+  USER_DASHBOARD, 
+  ADMIN_DASHBOARD,
 
   auth,
   db,
@@ -119,5 +126,6 @@ export {
   NextRequest, 
   NextResponse,
   axios,
-  User,
+  Roles, 
+  User, 
 };

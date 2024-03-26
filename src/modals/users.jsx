@@ -20,8 +20,9 @@ const userSchema = new mongoose.Schema({
         unique: true,
     },
     role_id: {
-        type: Number,
-        default: 3,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'roles',
+        default: '6600184a16ea8ac544677131',
     },
     date_of_birth: {
         type: Date,
