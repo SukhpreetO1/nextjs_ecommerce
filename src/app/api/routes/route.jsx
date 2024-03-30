@@ -3,17 +3,17 @@ import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 
 // getting data from components
-import InputField from "@/components/InputField";
-import DateField from "@/components/DateField";
-import RadioButtonField from "@/components/RadioButtonField";
 import CheckboxField from "@/components/CheckboxField";
+import DateField from "@/components/DateField";
+import InputField from "@/components/InputField";
 import PasswordField from "@/components/PasswordField";
+import RadioButtonField from "@/components/RadioButtonField";
 import SubmitButton from "@/components/SubmitButton";
 
 // js validation files
-import { validate_signup_submit_form } from "@/../public/assets/js/signup";
-import { validate_login_submit_form } from "@/../public/assets/js/login";
-import { validate_forgot_password_submit_form } from "@/../public/assets/js/forgot_password";
+import { validate_signup_submit_form } from "@/utils/js/signup";
+import { validate_login_submit_form } from "@/utils/js/login";
+import { validate_forgot_password_submit_form } from "@/utils/js/forgot_password";
 
 // page redirection files
 import {
@@ -31,7 +31,7 @@ import {
 // firebase import
 import { auth, db } from "@/db/firebase";
 
-import {
+import {  
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
@@ -40,14 +40,26 @@ import {
   signInWithCustomToken,
   sendPasswordResetEmail,
   signInWithPopup, 
-  GoogleAuthProvider
+  GoogleAuthProvider,
+  signInWithPhoneNumber,
+  RecaptchaVerifier,
+  PhoneAuthProvider,
+  signInWithCredential
 } from "firebase/auth";
+
+import { 
+  ref, 
+  uploadBytes, 
+  getStorage, 
+  getDownloadURL 
+} from "firebase/storage";
 
 // use toastify for notification
 import { ToastContainer, toast } from "react-toastify";
 
 // use fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrashCan, faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 
 // used to store data in cookies
 import Cookies from "js-cookie";
@@ -75,11 +87,11 @@ export {
   usePathname,
   Image,
 
-  InputField,
-  DateField,
-  RadioButtonField,
   CheckboxField,
+  DateField,
+  InputField,
   PasswordField,
+  RadioButtonField,
   SubmitButton,
 
   validate_signup_submit_form,
@@ -108,11 +120,24 @@ export {
   sendPasswordResetEmail,
   signInWithPopup, 
   GoogleAuthProvider,
+  signInWithPhoneNumber,
+  RecaptchaVerifier,
+  PhoneAuthProvider,
+  signInWithCredential,
+
+  ref, 
+  uploadBytes, 
+  getStorage, 
+  getDownloadURL,
 
   ToastContainer,
   toast,
 
   FontAwesomeIcon,
+  faPenToSquare, 
+  faTrashCan,
+  faEye, 
+  faEyeSlash,
 
   Cookies,
 
@@ -126,6 +151,7 @@ export {
   NextRequest, 
   NextResponse,
   axios,
+
   Roles, 
   User, 
 };

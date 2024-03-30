@@ -28,7 +28,7 @@ export async function POST(request) {
             role_name: role.name
         }
 
-        const token = await jwt.sign(tokenData, process.env.NEXT_PUBLIC_TOKEN_SECRET, {expiresIn: "10min"})
+        const token = await jwt.sign(tokenData, process.env.NEXT_PUBLIC_TOKEN_SECRET, {expiresIn: "30min"})
 
         let redirectUrl;
         if(tokenData.role_name === "Super Admin"){

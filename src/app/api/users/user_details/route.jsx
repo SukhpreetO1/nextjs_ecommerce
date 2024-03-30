@@ -22,7 +22,6 @@ export async function GET(request) {
                 $unset: "role"
             },
         ]);
-        console.log(usersWithRoles);
         return NextResponse.json({ usersWithRoles });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 })

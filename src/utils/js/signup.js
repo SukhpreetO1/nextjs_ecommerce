@@ -16,7 +16,7 @@ export const validate_signup_submit_form = (data) => {
     if (!data.email.trim()) {
         errors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(data.email)) {
-        errors.email = 'Invalid email format. Format must be like abc@gmail.com';
+        errors.email = 'Invalid email format.';
     }
 
     if (!data.username.trim()) {
@@ -25,8 +25,15 @@ export const validate_signup_submit_form = (data) => {
         errors.username = 'Username must contain letters and numbers only';
     }
 
+    const currentDate = new Date();
+    const inputDate = new Date(data.date_of_birth);
+
     if (!data.date_of_birth.trim()) {
-        errors.date_of_birth = 'Date of birth is required';
+        errors.date_of_birth = 'Date of birth is required.';
+    } else if (!/^\d{4}-\d{2}-\d{2}$/.test(data.date_of_birth)) {
+        errors.date_of_birth = 'Invalid date format.';
+    } else if (inputDate > currentDate) {
+        errors.date_of_birth = 'Date of birth cannot be greater than today.';
     }
 
     if (!data.mobile_number.trim()) {
@@ -40,7 +47,9 @@ export const validate_signup_submit_form = (data) => {
     }
 
     if (!data.hobbies) {
-        errors.hobbies = 'Hobby field is required';        
+        errors.hobbies = 'Hobby field is required.';  
+    } else if (data.hobbies == '') {
+        errors.hobbies = 'Please select atleast 1 hobby.';
     }
 
     if (!data.password.trim()) {

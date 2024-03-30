@@ -1,9 +1,6 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "@/app/api/routes/route";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Ecommerce",
@@ -13,9 +10,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {children}
-        <ToastContainer />
+      <body>
+        <main>
+          {children}
+          <ToastContainer position="top-right" />
+        </main>
       </body>
     </html>
   );

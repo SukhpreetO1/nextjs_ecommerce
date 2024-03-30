@@ -1,5 +1,5 @@
 "use client";
-import { InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, ToastContainer, useRouter, auth, createUserWithEmailAndPassword, onAuthStateChanged, getAuth, axios } from '@/app/api/routes/route';
+import { InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, useRouter, auth, createUserWithEmailAndPassword, onAuthStateChanged, getAuth, axios } from '@/app/api/routes/route';
 import React, { useState } from 'react';
 
 const genderOptions = [
@@ -61,19 +61,15 @@ const Signup = () => {
         }
 
         try {
-            const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
             const response = await axios.post('/api/users/signup', formData);
-            toast.success(response.data.message, { position: 'top-right' });
-            localStorage.setItem("hasShownAccountCreatedToast", false);
+            const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
             router.push(LOGIN_URL);
+            toast.success(response.data.message);
         } catch (error) {
-            const errorCode = error.code;
-            if (errorCode === 'auth/email-already-in-use') {
-                toast.error("Email is already in use. Please choose a different email.", {
-                    position: "top-right",
-                });
+            if (error.code === 'auth/email-already-in-use') {
+                toast.error("Email is already in use. Please choose a different email.");
             } else {
-                toast.error(error.message, { position: 'top-right' });
+                toast.error(error.response.data.error);
             }
         }
     };
@@ -82,7 +78,7 @@ const Signup = () => {
         <>
             <div className="sign_up_form -2/5">
                 <div className="heading font-bold text-center">
-                    <h1 className="text-3xl mt-16">Signup</h1>
+                    <h1 className="text-3xl mt-16">Create a new account</h1>
                 </div>
 
                 <form className="signup_form mt-8" onSubmit={formSubmit}>
@@ -119,10 +115,9 @@ const Signup = () => {
                     </div>
                 </form>
                 <div>
-                    <p className="mt-3 text-center text-sm text-gray-500">Already have an account? <Link href={LOGIN_URL} className="underline underline-offset-4 italic text-blue-500">Login here.</Link></p>
+                    <Link href={LOGIN_URL} className="underline underline-offset-4 italic text-blue-500"><p className="mt-3 text-center text-sm text-blue-500">Already have an account?</p></Link>
                 </div>
-            </div>
-            <ToastContainer />
+            </div> 
         </>
     );
 };

@@ -17,11 +17,11 @@ export async function POST(request) {
 
         if (existingUser) {
             if (existingUser.email === email) {
-                return NextResponse.json({ error: "Email already registered" }, { status: 500 });
+                return NextResponse.json({ error: "Email already exits. Please choose a different email." }, { status: 500 });
             } else if (existingUser.username === username) {
-                return NextResponse.json({ error: "Username already taken" }, { status: 500 });
+                return NextResponse.json({ error: "Username already exits. Please choose a different username." }, { status: 500 });
             } else if (existingUser.mobile_number === mobile_number) {
-                return NextResponse.json({ error: "Mobile number already registered" }, { status: 500 });
+                return NextResponse.json({ error: "Mobile number already registered." }, { status: 500 });
             }
         }
 
@@ -42,7 +42,7 @@ export async function POST(request) {
         });
 
         const savedUser = await newUser.save();
-        return NextResponse.json({ message: "New user created successfully.", success: true, savedUser }) 
+        return NextResponse.json({ message: "Registered Successfully.", success: true, savedUser }) 
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 })
     }

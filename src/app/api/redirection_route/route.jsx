@@ -10,9 +10,9 @@ export const GOOGLE_LOGO = "/assets/images/google.png";
 export const PHONE_NUMBER_LOGO = "/assets/images/phone_number.jpg";
 
 // getting routes for the users side 
-export const USER_DASHBOARD = `${process.env.BASE_URL}/dashboard`;
+export const USER_DASHBOARD = "/dashboard";
 
 
 
 // getting routes for the admin side
-export const ADMIN_DASHBOARD = `${process.env.BASE_URL}/admin/dashboard`;
+export const ADMIN_DASHBOARD = "/admin/dashboard";
