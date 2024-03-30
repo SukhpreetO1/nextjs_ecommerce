@@ -1,5 +1,5 @@
 "use client";
-import { InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, Cookies, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider, axios, jwt, signInWithPhoneNumber, RecaptchaVerifier, PhoneAuthProvider } from '@/app/api/routes/route';
+import { InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, Cookies, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider, axios, jwt, signInWithPhoneNumber, RecaptchaVerifier, PhoneAuthProvider, USER_DASHBOARD } from '@/app/api/routes/route';
 import React, { useState, useEffect } from 'react';
 
 const Login = () => {
@@ -24,12 +24,14 @@ const Login = () => {
   const loginFormSubmit = async (e) => {
     e.preventDefault();
     const validation_errors = validate_login_submit_form(formData);
+    const expirationTime = new Date();
+    expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
     if (Object.keys(validation_errors).length === 0) {
       try {
         setDisabled(true);
         await signInWithEmailAndPassword(auth, formData.email, formData.password);
         const response = await axios.post('/api/users/login', formData);
-        Cookies.set('currentUserToken', JSON.stringify(response.data.token));
+        Cookies.set('currentUserToken', JSON.stringify(response.data.token), { expires: expirationTime });
         router.push(response.data.redirectUrl);
         setDisabled(false);
         toast.success("Login successfully.")
@@ -49,14 +51,20 @@ const Login = () => {
     expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
     try {
       await signInWithPopup(auth, provider);
-      Cookies.set('currentUserToken', JSON.stringify(auth.currentUser.accessToken), {
-        expires: expirationTime
+      const response = await axios.post('/api/users/login/login_with_google', {
+        fullname : auth.currentUser.displayName || '',
+        email : auth.currentUser.email || '',
       });
-      router.push(NAVBAR_DASHBOARD);
-      toast.success("Login successfully.")
-      setDisabled(false);
+      if (response.data.message === "Registered Successfully.") {
+        Cookies.set('currentUserToken', JSON.stringify(response.data.token), { expires: expirationTime });
+        router.push(USER_DASHBOARD);
+        toast.success("Login successfully.")
+      } else {
+        console.log(response.data.error);
+        toast.error("Invalid credential.");
+      }
     } catch (err) {
-      console.log(err);
+      console.log(err.response.data.error);
     }
   }
 

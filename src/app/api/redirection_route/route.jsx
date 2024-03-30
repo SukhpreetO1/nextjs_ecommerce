@@ -6,8 +6,8 @@ export const FORGOT_PASSWORD = "/forgot_password";
 
 // getting routes from public component
 export const LOGO_IMAGE_URL = "/assets/images/m_logo.avif";
-export const GOOGLE_LOGO = "/assets/images/google.png";
-export const PHONE_NUMBER_LOGO = "/assets/images/phone_number.jpg";
+export const GOOGLE_LOGO = "https://firebasestorage.googleapis.com/v0/b/nextjs-ecommerce-100b3.appspot.com/o/public_images%2Fgoogle.png?alt=media&token=6bbe7c5c-1b0c-47d3-90c4-e684be0010ea";
+export const PHONE_NUMBER_LOGO = "https://firebasestorage.googleapis.com/v0/b/nextjs-ecommerce-100b3.appspot.com/o/public_images%2Fphone_number.jpg?alt=media&token=093bf0b0-f678-4b31-9844-9996c2fd7fe7https://firebasestorage.googleapis.com/v0/b/nextjs-ecommerce-100b3.appspot.com/o/public_images%2Fphone_number.jpg?alt=media&token=093bf0b0-f678-4b31-9844-9996c2fd7fe7";
 
 // getting routes for the users side 
 export const USER_DASHBOARD = "/dashboard";
