@@ -28,6 +28,12 @@ import {
   ADMIN_DASHBOARD
 } from "@/app/api/redirection_route/route";
 
+import { 
+  MONGODB_API_SIGNUP,
+  MONGODB_API_LOGIN,
+  MONGODB_API_LOGIN_WITH_GOOGLE
+} from "@/app/api/mongodb_api/route";
+
 // firebase import
 import { auth, db } from "@/db/firebase";
 
@@ -107,6 +113,10 @@ export {
   PHONE_NUMBER_LOGO,
   USER_DASHBOARD, 
   ADMIN_DASHBOARD,
+
+  MONGODB_API_SIGNUP,
+  MONGODB_API_LOGIN,
+  MONGODB_API_LOGIN_WITH_GOOGLE,
 
   auth,
   db,

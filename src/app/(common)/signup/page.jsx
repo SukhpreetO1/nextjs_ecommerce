@@ -1,5 +1,5 @@
 "use client";
-import { InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, useRouter, auth, createUserWithEmailAndPassword, onAuthStateChanged, getAuth, axios } from '@/app/api/routes/route';
+import { InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, useRouter, auth, createUserWithEmailAndPassword, onAuthStateChanged, getAuth, axios, MONGODB_API_SIGNUP } from '@/app/api/routes/route';
 import React, { useState } from 'react';
 
 const genderOptions = [
@@ -61,7 +61,7 @@ const Signup = () => {
         }
 
         try {
-            const response = await axios.post('/api/users/signup', formData);
+            const response = await axios.post(MONGODB_API_SIGNUP, formData);
             const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
             router.push(LOGIN_URL);
             toast.success(response.data.message);
