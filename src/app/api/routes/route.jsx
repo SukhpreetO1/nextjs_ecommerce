@@ -84,7 +84,9 @@ import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
 // modal redirection 
+import Privacy_Policy from "@/modals/privacy_policy";
 import Roles from "@/modals/roles";
+import Terms_and_conditions from "@/modals/terms_and_conditions";
 import User from "@/modals/users";
 
 export {
@@ -162,6 +164,8 @@ export {
   NextResponse,
   axios,
 
+  Privacy_Policy,
   Roles, 
+  Terms_and_conditions, 
   User, 
 };

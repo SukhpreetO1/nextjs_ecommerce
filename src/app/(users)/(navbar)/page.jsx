@@ -5,7 +5,7 @@ const Navbar = () => {
     <>
         <section>
             <div className="navbar">
-                
+                Navbar
             </div>    
         </section> 
     </>

@@ -12,6 +12,9 @@ export const PHONE_NUMBER_LOGO = "https://firebasestorage.googleapis.com/v0/b/ne
 // getting routes for the users side 
 export const USER_DASHBOARD = "/dashboard";
 
+// getting routes for footer section
+export const PRIVACY_POLICIES = "/privacy_policy";
+export const TERMS_AND_CONDITION = "/terms_and_conditions";
 
 
 // getting routes for the admin side
