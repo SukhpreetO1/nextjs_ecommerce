@@ -89,6 +89,8 @@ import Roles from "@/modals/roles";
 import Terms_and_conditions from "@/modals/terms_and_conditions";
 import User from "@/modals/users";
 
+import Sidebar from "@/app/admin/(sidebar)/page";
+
 export {
   Link,
   useRouter,
@@ -168,4 +170,6 @@ export {
   Roles, 
   Terms_and_conditions, 
   User, 
+
+  Sidebar,
 };

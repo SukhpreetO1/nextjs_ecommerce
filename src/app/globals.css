@@ -63,3 +63,9 @@
     margin-right: 0rem !important;
   }
 }
+
+@media (min-width: 640px) and (max-width: 768px)  {
+  .admin_sidebar {
+    width: 15rem !important;
+  }
+}
