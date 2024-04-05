@@ -5,7 +5,7 @@ export default function CommonLayout({
   children,
 }) {
   return (
-    <section className="flex" >
+    <section>
       <Sidebar />
       {children}
     </section>

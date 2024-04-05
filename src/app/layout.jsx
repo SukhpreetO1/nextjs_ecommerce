@@ -12,8 +12,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <main>
-          {children}
-          <ToastContainer position="top-right" />
+          <div className="container mx-auto">
+            {children}
+            <ToastContainer position="top-right" />
+          </div>
         </main>
       </body>
     </html>
