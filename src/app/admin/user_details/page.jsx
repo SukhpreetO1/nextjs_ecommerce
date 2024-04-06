@@ -1,6 +1,5 @@
 "use client";
-import { FontAwesomeIcon, Link, faPenToSquare, faTrashCan } from "@/app/api/routes/route";
-import { MONGODB_USERS_DETAILS } from '@/app/api/mongodb_api/route';
+import { FontAwesomeIcon, Link, faPenToSquare, faTrashCan, MONGODB_USERS_DETAILS } from "@/app/api/routes/route";
 import React, { useEffect, useState } from 'react'
 
 const User_details = () => {

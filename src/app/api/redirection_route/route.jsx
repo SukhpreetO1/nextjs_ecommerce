@@ -21,5 +21,7 @@ export const TERMS_AND_CONDITION = "/terms_and_conditions";
 export const ADMIN_DASHBOARD = "/admin/dashboard";
 export const ADMIN_USER_DETAILS = "/admin/user_details";
 export const ADMIN_CATEGORY_HEADING = "/admin/category_heading";
+export const ADMIN_ADD_CATEGORY_HEADING = "/admin/category_heading/add_category_heading";
+export const ADMIN_EDIT_CATEGORY_HEADING = "/admin/category_heading/edit_category_heading";
 export const ADMIN_CATEGORY_TYPES = "/admin/category_types";
 export const ADMIN_CATEGORIES = "/admin/categories";

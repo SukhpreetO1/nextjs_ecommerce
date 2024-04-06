@@ -14,6 +14,7 @@ import SubmitButton from "@/components/SubmitButton";
 import { validate_signup_submit_form } from "@/utils/js/signup";
 import { validate_login_submit_form } from "@/utils/js/login";
 import { validate_forgot_password_submit_form } from "@/utils/js/forgot_password";
+import { validate_category_header } from "@/utils/js/category_header";
 
 // page redirection files
 import {
@@ -28,6 +29,8 @@ import {
   ADMIN_DASHBOARD,
   ADMIN_USER_DETAILS,
   ADMIN_CATEGORY_HEADING,
+  ADMIN_ADD_CATEGORY_HEADING,
+  ADMIN_EDIT_CATEGORY_HEADING,
   ADMIN_CATEGORY_TYPES,
   ADMIN_CATEGORIES,
 } from "@/app/api/redirection_route/route";
@@ -35,7 +38,11 @@ import {
 import { 
   MONGODB_API_SIGNUP,
   MONGODB_API_LOGIN,
-  MONGODB_API_LOGIN_WITH_GOOGLE
+  MONGODB_API_LOGIN_WITH_GOOGLE,
+  MONGODB_USERS_DETAILS,
+  MONGODB_CATEGORY_HEADING,
+  MONGODB_CATEGORY_TYPES,
+  MONGODB_CATEGORIES,
 } from "@/app/api/mongodb_api/route";
 
 // firebase import
@@ -69,7 +76,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 // use fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrashCan, faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
+import { faPenToSquare, faTrashCan, faEye, faEyeSlash, faPlusSquare } from "@fortawesome/free-regular-svg-icons";
 
 // used to store data in cookies
 import Cookies from "js-cookie";
@@ -114,6 +121,7 @@ export {
   validate_signup_submit_form,
   validate_login_submit_form,
   validate_forgot_password_submit_form,
+  validate_category_header,
 
   HOME_URL,
   LOGIN_URL,
@@ -126,12 +134,18 @@ export {
   ADMIN_DASHBOARD,
   ADMIN_USER_DETAILS,
   ADMIN_CATEGORY_HEADING,
+  ADMIN_ADD_CATEGORY_HEADING,
+  ADMIN_EDIT_CATEGORY_HEADING,
   ADMIN_CATEGORY_TYPES,
   ADMIN_CATEGORIES,
 
   MONGODB_API_SIGNUP,
   MONGODB_API_LOGIN,
   MONGODB_API_LOGIN_WITH_GOOGLE,
+  MONGODB_USERS_DETAILS,
+  MONGODB_CATEGORY_HEADING,
+  MONGODB_CATEGORY_TYPES,
+  MONGODB_CATEGORIES,
 
   auth,
   db,
@@ -163,6 +177,7 @@ export {
   faTrashCan,
   faEye, 
   faEyeSlash,
+  faPlusSquare,
 
   Cookies,
 
