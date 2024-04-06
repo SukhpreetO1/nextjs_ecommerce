@@ -20,3 +20,4 @@ export const TERMS_AND_CONDITION = "/terms_and_conditions";
 // getting routes for the admin side
 export const ADMIN_DASHBOARD = "/admin/dashboard";
 export const ADMIN_USER_DETAILS = "/admin/user_details";
+export const ADMIN_CATEGORY_HEADING = "/admin/category_heading";

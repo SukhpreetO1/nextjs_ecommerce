@@ -1,4 +1,5 @@
 "use client";
+import { FontAwesomeIcon, Link, faPenToSquare, faTrashCan } from "@/app/api/routes/route";
 import { MONGODB_USERS_DETAILS } from '@/app/api/mongodb_api/route';
 import React, { useEffect, useState } from 'react'
 
@@ -8,7 +9,6 @@ const User_details = () => {
         const fetchUsers = async () => {
             const response = await fetch(MONGODB_USERS_DETAILS);
             const userData = await response.json();
-            console.log(userData.data);
             setUsersDetails(userData.data);
         }
         fetchUsers();
@@ -51,8 +51,8 @@ const User_details = () => {
                                         <td className={`px-6 py-4 whitespace-pre ${!user?.gender ? 'text-center' : ''}`}>{user?.gender || "-"}</td>
                                         <td className={`px-6 py-4 whitespace-pre ${!user?.hobbies ? 'text-center' : ''}`}>{user?.hobbies ? user.hobbies.join(', ') : "-"}</td>
                                         <td className="flex items-center px-6 py-4">
-                                            <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                            <a href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
+                                            <Link href="#" className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} /></Link>
+                                            <Link href="#" className="text-red-600 mr-2 user_delete_option"><FontAwesomeIcon icon={faTrashCan} /></Link>
                                         </td>
                                     </tr>
                                 ))}
