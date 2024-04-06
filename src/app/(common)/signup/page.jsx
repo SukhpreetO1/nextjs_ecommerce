@@ -3,17 +3,17 @@ import { InputField, DateField, RadioButtonField, CheckboxField, PasswordField, 
 import React, { useState } from 'react';
 
 const genderOptions = [
-    { label: 'Male', value: '1' },
-    { label: 'Female', value: '2' },
-    { label: 'Other', value: '3' },
+    { label: 'Male', value: 'Male' },
+    { label: 'Female', value: 'Female' },
+    { label: 'Other', value: 'Other' },
 ];
 
 const hobbiesOptions = [
-    { label: 'Football', value: '1', selected: false },
-    { label: 'Cricket', value: '2', selected: false },
-    { label: 'Basketball', value: '3', selected: false },
-    { label: 'Tennis', value: '4', selected: false },
-    { label: 'Others', value: '5', selected: false },
+    { label: 'Football', value: 'Football', selected: false },
+    { label: 'Cricket', value: 'Cricket', selected: false },
+    { label: 'Basketball', value: 'Basketball', selected: false },
+    { label: 'Tennis', value: 'Tennis', selected: false },
+    { label: 'Others', value: 'Others', selected: false },
 ];
 
 const Signup = () => {

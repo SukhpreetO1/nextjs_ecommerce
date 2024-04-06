@@ -34,7 +34,7 @@ const userSchema = new mongoose.Schema({
         unique: true,
     },
     gender: {
-        type: Number,
+        type: String,
         require: [true, 'Gender is required'],
     },
     hobbies: {

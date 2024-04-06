@@ -44,6 +44,7 @@ export async function POST(request) {
         const savedUser = await newUser.save();
         return NextResponse.json({ message: "Registered Successfully.", success: true, savedUser }) 
     } catch (error) {
+        console.log(error);
         return NextResponse.json({ error: error.message }, { status: 500 })
     }
 }
