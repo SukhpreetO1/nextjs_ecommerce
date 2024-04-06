@@ -4,7 +4,7 @@ connect();
 
 export async function GET(request) {
     try {
-        const usersWithRoles = await User.aggregate([
+        const data = await User.aggregate([
             {
                 $lookup: {
                     from: "roles",
@@ -22,7 +22,7 @@ export async function GET(request) {
                 $unset: "role"
             },
         ]);
-        return NextResponse.json({ usersWithRoles });
+        return NextResponse.json({ data });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 })
     }
