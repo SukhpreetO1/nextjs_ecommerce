@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Link, ADMIN_DASHBOARD, ADMIN_USER_DETAILS, ADMIN_CATEGORY_HEADING } from "@/app/api/routes/route"
+import { Link, ADMIN_DASHBOARD, ADMIN_USER_DETAILS, ADMIN_CATEGORY_HEADING, ADMIN_CATEGORIES, ADMIN_CATEGORY_TYPES } from "@/app/api/routes/route"
 
 const AdminSidebar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -61,11 +61,27 @@ const AdminSidebar = () => {
                 </Link>
               </li>
               <li>
-                <Link href={ADMIN_CATEGORY_HEADING} className="flex items-center p-2 ps-4 text-gray-900 hover:bg-gray-100 dark:hover:bg-blue-500 dark:hover:text-white group">
-                  <svg className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                <Link href={ADMIN_CATEGORY_HEADING} className={`flex items-center p-2 ps-4 text-gray-900 hover:bg-gray-100 dark:hover:bg-blue-500 dark:hover:text-white group ${isActive('category_heading') ? 'bg-blue-500 text-white ' : ''}`} onClick={() => handleItemClick('category_heading')}>
+                  <svg className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white ${isActive('category_heading') ? ' dark:text-white ' : ''}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
                     <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
                   </svg>
                   <span className="flex-1 ms-3 whitespace-nowrap">Category Heading</span>
+                </Link>
+              </li>
+              <li>
+                <Link href={ADMIN_CATEGORY_TYPES} className={`flex items-center p-2 ps-4 text-gray-900 hover:bg-gray-100 dark:hover:bg-blue-500 dark:hover:text-white group ${isActive('category_types') ? 'bg-blue-500 text-white ' : ''}`} onClick={() => handleItemClick('category_types')}>
+                  <svg className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white ${isActive('category_types') ? ' dark:text-white ' : ''}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
+                  </svg>
+                  <span className="flex-1 ms-3 whitespace-nowrap">Category Types</span>
+                </Link>
+              </li>
+              <li>
+                <Link href={ADMIN_CATEGORIES} className={`flex items-center p-2 ps-4 text-gray-900 hover:bg-gray-100 dark:hover:bg-blue-500 dark:hover:text-white group ${isActive('categories') ? 'bg-blue-500 text-white ' : ''}`} onClick={() => handleItemClick('categories')}>
+                  <svg className={`flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white ${isActive('categories') ? ' dark:text-white ' : ''}`} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <path d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
+                  </svg>
+                  <span className="flex-1 ms-3 whitespace-nowrap">Categories</span>
                 </Link>
               </li>
               <li>

@@ -37,26 +37,31 @@ const User_details = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {usersDetails?.map((user, index) => (
-                                    <tr key={user?.id || index} className="text-gray-600">
-                                        <td className="px-6 py-4 whitespace-pre">{user?.first_name || "-"}</td>
-                                        <td className="px-6 py-4 whitespace-pre">{user?.last_name || "-"}</td>
-                                        <td className="px-6 py-4 whitespace-pre">{user?.email || "-"}</td>
-                                        <td className={`px-6 py-4 whitespace-pre ${!user?.username ? 'text-center' : ''}`}>{user?.username || "-"}</td>
-                                        <td className={`px-6 py-4 whitespace-pre ${!user?.role_id.name ? 'text-center' : ''}`}>{user?.role_id.name || "-"}</td>
-                                        <td className={`px-6 py-4 whitespace-pre ${!user?.date_of_birth ? 'text-center' : ''}`}>
-                                            {user?.date_of_birth ? new Date(user.date_of_birth).toISOString().slice(0, 10) : "-"}
-                                        </td>
-                                        <td className={`px-6 py-4 whitespace-pre ${!user?.mobile_number ? 'text-center' : ''}`}>{user?.mobile_number || "-"}</td>
-                                        <td className={`px-6 py-4 whitespace-pre ${!user?.gender ? 'text-center' : ''}`}>{user?.gender || "-"}</td>
-                                        <td className={`px-6 py-4 whitespace-pre ${!user?.hobbies ? 'text-center' : ''}`}>{user?.hobbies ? user.hobbies.join(', ') : "-"}</td>
-                                        <td className="flex items-center px-6 py-4">
-                                            <Link href="#" className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} /></Link>
-                                            <Link href="#" className="text-red-600 mr-2 user_delete_option"><FontAwesomeIcon icon={faTrashCan} /></Link>
-                                        </td>
+                                {usersDetails && usersDetails.length > 0 ? (
+                                    usersDetails?.map((user, index) => (
+                                        <tr key={user?.id || index} className="text-gray-600">
+                                            <td className="px-6 py-4 whitespace-pre">{user?.first_name || "-"}</td>
+                                            <td className="px-6 py-4 whitespace-pre">{user?.last_name || "-"}</td>
+                                            <td className="px-6 py-4 whitespace-pre">{user?.email || "-"}</td>
+                                            <td className={`px-6 py-4 whitespace-pre ${!user?.username ? 'text-center' : ''}`}>{user?.username || "-"}</td>
+                                            <td className={`px-6 py-4 whitespace-pre ${!user?.role_id.name ? 'text-center' : ''}`}>{user?.role_id.name || "-"}</td>
+                                            <td className={`px-6 py-4 whitespace-pre ${!user?.date_of_birth ? 'text-center' : ''}`}>
+                                                {user?.date_of_birth ? new Date(user.date_of_birth).toISOString().slice(0, 10) : "-"}
+                                            </td>
+                                            <td className={`px-6 py-4 whitespace-pre ${!user?.mobile_number ? 'text-center' : ''}`}>{user?.mobile_number || "-"}</td>
+                                            <td className={`px-6 py-4 whitespace-pre ${!user?.gender ? 'text-center' : ''}`}>{user?.gender || "-"}</td>
+                                            <td className={`px-6 py-4 whitespace-pre ${!user?.hobbies ? 'text-center' : ''}`}>{user?.hobbies ? user.hobbies.join(', ') : "-"}</td>
+                                            <td className="flex items-center px-6 py-4">
+                                                <Link href="#" className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} /></Link>
+                                                <Link href="#" className="text-red-600 mr-2 user_delete_option"><FontAwesomeIcon icon={faTrashCan} /></Link>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="10" className="px-6 py-4 text-center text-gray-600">No data found</td>
                                     </tr>
-                                ))}
-
+                                )}
                             </tbody>
                         </table>
                     </div>

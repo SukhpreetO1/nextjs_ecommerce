@@ -27,7 +27,9 @@ import {
   USER_DASHBOARD, 
   ADMIN_DASHBOARD,
   ADMIN_USER_DETAILS,
-  ADMIN_CATEGORY_HEADING
+  ADMIN_CATEGORY_HEADING,
+  ADMIN_CATEGORY_TYPES,
+  ADMIN_CATEGORIES,
 } from "@/app/api/redirection_route/route";
 
 import { 
@@ -90,6 +92,9 @@ import Privacy_Policy from "@/modals/privacy_policy";
 import Roles from "@/modals/roles";
 import Terms_and_conditions from "@/modals/terms_and_conditions";
 import User from "@/modals/users";
+import Category_Heading from "@/modals/category_heading";
+import Category_Types from "@/modals/category_types";
+import Categories from "@/modals/Categories";
 
 import Sidebar from "@/app/admin/(sidebar)/page";
 
@@ -121,6 +126,8 @@ export {
   ADMIN_DASHBOARD,
   ADMIN_USER_DETAILS,
   ADMIN_CATEGORY_HEADING,
+  ADMIN_CATEGORY_TYPES,
+  ADMIN_CATEGORIES,
 
   MONGODB_API_SIGNUP,
   MONGODB_API_LOGIN,
@@ -174,6 +181,9 @@ export {
   Roles, 
   Terms_and_conditions, 
   User, 
+  Category_Heading,
+  Category_Types,
+  Categories,
 
   Sidebar,
 };
