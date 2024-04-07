@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-200">
-        <div className="flex flex-wrap items-center justify-between mx-auto p-4">
+        <div className="flex flex-wrap items-center justify-between mx-auto p-4 px-16">
           <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
           </a>
@@ -29,7 +29,7 @@ const Navbar = () => {
                 </svg>
               </button>
             </div>
-            <div className="relative hidden md:block mr-4">
+            <div className="relative hidden md:block mr-4" style={{ width: "33rem" }}>
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg className="w-4 h-4 text-gray-200 dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                   <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
@@ -46,14 +46,14 @@ const Navbar = () => {
               </button>
               <div className='hidden w-full md:block md:w-auto mt-1'>
                 <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-200 dark:border-gray-700">
-                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex"><FontAwesomeIcon icon={faUser} /><span className='absolute top-10 right-44'>Profile</span></Link></li>
-                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex"><FontAwesomeIcon icon={faHeart} /><span className='absolute top-10 right-20'>Wishlist</span></Link></li>
-                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex"><FontAwesomeIcon icon={faShoppingBag} /><span className='absolute top-10 right-6'>Bag</span></Link></li>
+                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex"><FontAwesomeIcon icon={faUser} /><span className='absolute top-10 right-56'>Profile</span></Link></li>
+                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex"><FontAwesomeIcon icon={faHeart} /><span className='absolute top-10 right-32'>Wishlist</span></Link></li>
+                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex"><FontAwesomeIcon icon={faShoppingBag} /><span className='absolute top-10 right-16'>Bag</span></Link></li>
                 </ul>
               </div>
             </div>
           </div>
-          <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-search">
+          <div className="items-center justify-between hidden md:flex md:order-1" id="navbar-search" style={{ width: '30rem' }}>
             <div className="relative mt-3 md:hidden">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg className="w-4 h-4 text-gray-500 dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -65,7 +65,7 @@ const Navbar = () => {
             {categoryHeader && categoryHeader.map((category_header, index) => (
               category_header.status === 1 && (
                 <ul key={index} className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-200 dark:border-gray-700">
-                  <li><Link href="#" className="block py-2 px-3 text-black hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 w-40 uppercase text-center">{category_header.name}</Link></li>
+                  <li><Link href="#" className="block py-2 px-3 text-black hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 w-fit uppercase text-center">{category_header.name}</Link></li>
                 </ul>
               )
             ))}
