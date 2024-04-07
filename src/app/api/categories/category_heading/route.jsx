@@ -14,8 +14,8 @@ export async function GET(request) {
 export async function POST(request) {
     try {
         const reqBody = await request.json();        
-        const { category_header_name } = reqBody;
-        const categoryHeading = new Category_Heading({ name: category_header_name });
+        const { name } = reqBody;
+        const categoryHeading = new Category_Heading({ name });
         const category_heading = await categoryHeading.save();
         return NextResponse.json({ category_heading });
     } catch (error) {

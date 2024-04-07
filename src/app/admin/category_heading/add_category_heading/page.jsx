@@ -4,7 +4,7 @@ import { ADMIN_CATEGORY_HEADING, InputField, MONGODB_CATEGORY_HEADING, SubmitBut
 
 const AddCategoryheading = () => {
     const router = useRouter();
-    const [formData, setFormData] = useState({category_header_name : ''});
+    const [formData, setFormData] = useState({name : ''});
     const [errors, setErrors] = useState({});
 
     const handleInputChange = (e) => {
@@ -20,7 +20,7 @@ const AddCategoryheading = () => {
         if (Object.keys(validation_errors).length === 0) {
             try {
                 const response = await axios.post(MONGODB_CATEGORY_HEADING, formData);
-                setFormData({ category_header_name: '' });
+                setFormData({ name: '' });
                 router.push(ADMIN_CATEGORY_HEADING);
                 toast.success("Category Header Added Successfully");
             } catch (error) {
@@ -42,7 +42,7 @@ const AddCategoryheading = () => {
                 <div className="add_category_heading_form w-2/5 sm:ml-96">
                     <form method='POST' onSubmit={addCategoryHeadingForm}>
                         <div className="add_category_name">
-                            <InputField label_heading="Category Header Name " id="add_category_header_name" className="add_category_header_name" name="category_header_name" placeholder="Add Category Header Name..." div_name="add_category_header_name" value={formData.category_header_name} onChange={handleInputChange} error={errors.category_header_name} />
+                            <InputField label_heading="Category Header Name " id="add_category_header_name" className="add_category_header_name" name="name" placeholder="Add Category Header Name..." div_name="add_category_header_name" value={formData.name} onChange={handleInputChange} error={errors.name} />
                         </div>
                         <div className='submit_button'>
                             <SubmitButton className="add_category_heading_button" id="add_category_heading_button" name="add_category_heading_button" div_name="add_category_heading_button" label="Submit" />

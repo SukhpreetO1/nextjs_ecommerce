@@ -60,7 +60,7 @@ const CategoryHeading = () => {
                       <td className="px-6 py-4 whitespace-pre">{category_heading?.name || "-"}</td>
                       <td className="px-6 py-4 whitespace-pre">{category_heading?.status === 1 ? "Active" : "Inactive" || "-"}</td>
                       <td className="flex items-center px-6 py-4">
-                        <Link href={ADMIN_EDIT_CATEGORY_HEADING} className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} title='Edit Category Header'/></Link>
+                        <Link href={`${ADMIN_EDIT_CATEGORY_HEADING}/${category_heading?._id}`} className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} title='Edit Category Header'/></Link>
                         <Link href="#" className="text-red-600 mr-2 user_delete_option" onClick={() => deleteCategoryHeader(category_heading?._id)}><FontAwesomeIcon icon={faTrashCan} title='Delete Category Header'/></Link>
                       </td>
                     </tr>
