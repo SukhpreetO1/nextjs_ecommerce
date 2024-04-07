@@ -45,6 +45,8 @@ import {
   MONGODB_CATEGORIES,
 } from "@/app/api/mongodb_api/route";
 
+import Navbar from "@/app/(users)/(navbar)/page";
+
 // firebase import
 import { auth, db } from "@/db/firebase";
 
@@ -146,6 +148,8 @@ export {
   MONGODB_CATEGORY_HEADING,
   MONGODB_CATEGORY_TYPES,
   MONGODB_CATEGORIES,
+
+  Navbar,
 
   auth,
   db,

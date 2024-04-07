@@ -57,3 +57,9 @@ To send the mail
 To connect the front end with database
     npm install mongoose
     npm install aws4
+
+
+To Kill the terminal in windows 
+    netstat -ano | findstr :3000
+
+    taskkill /PID <PID> /F
