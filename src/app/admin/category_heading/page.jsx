@@ -1,10 +1,11 @@
 "use client";
 import React, { useEffect, useState } from 'react'
-import { FontAwesomeIcon, Link, faPenToSquare, faTrashCan, faPlusSquare, ADMIN_ADD_CATEGORY_HEADING, ADMIN_EDIT_CATEGORY_HEADING, toast } from "@/app/api/routes/route";
+import { FontAwesomeIcon, Link, faPenToSquare, faTrashCan, faPlusSquare, ADMIN_ADD_CATEGORY_HEADING, ADMIN_EDIT_CATEGORY_HEADING, toast, axios } from "@/app/api/routes/route";
 import { MONGODB_CATEGORY_HEADING } from '@/app/api/mongodb_api/route';
 
 const CategoryHeading = () => {
   const [categoryHeading, setCategoryheading] = useState([]);
+  const [isChecked, setIsChecked] = useState();
 
   useEffect(() => {
     const fetchCategoryHeading = async () => {
@@ -15,9 +16,14 @@ const CategoryHeading = () => {
     fetchCategoryHeading();
   }, [])
 
+  useEffect(() => {
+    const initialCheckedState = categoryHeading.map((category_heading) => category_heading.status === 1 ? true : false);
+    setIsChecked(initialCheckedState);
+  }, [categoryHeading]);
+
   const deleteCategoryHeader = async (category_heading_id) => {
     const confirmation = confirm("Are you sure you want to delete this category header?");
-    if (confirmation === true){
+    if (confirmation === true) {
       const response = await fetch(MONGODB_CATEGORY_HEADING + '/' + category_heading_id, {
         method: 'DELETE',
         headers: {
@@ -25,13 +31,21 @@ const CategoryHeading = () => {
         }
       });
       if (response.ok === true) {
-        toast.success("Category Header deleted successfully");
         const updatedCategoryHeading = categoryHeading.filter(item => item._id !== category_heading_id);
         setCategoryheading(updatedCategoryHeading);
+        toast.success("Category Header deleted successfully");
       } else {
         console.log(error);
       }
-    } 
+    }
+  }
+
+  const handleCheckboxChange = async (e, category_heading_id) => {
+    const status_value = e.target.checked ? 1 : 2;
+    setIsChecked(e.target.checked);
+    const updatedCategoryHeading = await axios.put(MONGODB_CATEGORY_HEADING + "/" + category_heading_id, { status: status_value });
+    setCategoryheading(updatedCategoryHeading.data.category_heading);
+    toast.success("Status updated successfully.")
   }
 
   return (
@@ -56,12 +70,18 @@ const CategoryHeading = () => {
               <tbody>
                 {categoryHeading && categoryHeading.length > 0 ? (
                   categoryHeading?.map((category_heading, index) => (
-                    <tr key={index} className="text-gray-600">
+                    <tr key={index} className="text-gray-600 border-b-2 border-gray-200">
                       <td className="px-6 py-4 whitespace-pre">{category_heading?.name || "-"}</td>
                       <td className="px-6 py-4 whitespace-pre">{category_heading?.status === 1 ? "Active" : "Inactive" || "-"}</td>
-                      <td className="flex items-center px-6 py-4">
-                        <Link href={`${ADMIN_EDIT_CATEGORY_HEADING}/${category_heading?._id}`} className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} title='Edit Category Header'/></Link>
-                        <Link href="#" className="text-red-600 mr-2 user_delete_option" onClick={() => deleteCategoryHeader(category_heading?._id)}><FontAwesomeIcon icon={faTrashCan} title='Delete Category Header'/></Link>
+                      <td className="flex items-center px-6 py-2">
+                        <Link href={`${ADMIN_EDIT_CATEGORY_HEADING}/${category_heading?._id}`} className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} title='Edit Category Header' /></Link>
+                        <Link href="#" className="text-red-600 mr-2 user_delete_option" onClick={() => deleteCategoryHeader(category_heading?._id)}><FontAwesomeIcon icon={faTrashCan} title='Delete Category Header' /></Link>
+                        <div className="toggle_buttom">
+                          <label className="inline-flex items-center mb-5 cursor-pointer">
+                            <input type="checkbox" value={category_heading.status} className="sr-only peer" checked={isChecked[index]} onChange={(e) => handleCheckboxChange(e, category_heading._id)} />
+                            <div className="relative top-3 w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 "> </div>
+                          </label>
+                        </div>
                       </td>
                     </tr>
                   ))

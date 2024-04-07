@@ -22,8 +22,9 @@ export async function GET(req, {params}){
 export async function PUT(req, {params}) {
     try {
         const reqBody = await req.json();        
-        const { name } = reqBody;
-        const category_heading = await Category_Heading.findByIdAndUpdate(params.id, {name});
+        console.log(reqBody);
+        const { name, status } = reqBody;
+        const category_heading = await Category_Heading.findByIdAndUpdate(params.id, {name, status});
         return NextResponse.json({ category_heading }); 
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 })
