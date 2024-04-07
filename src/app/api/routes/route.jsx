@@ -78,7 +78,17 @@ import { ToastContainer, toast } from "react-toastify";
 
 // use fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrashCan, faEye, faEyeSlash, faPlusSquare } from "@fortawesome/free-regular-svg-icons";
+import { 
+  faPenToSquare, 
+  faTrashCan, 
+  faEye, 
+  faEyeSlash, 
+  faPlusSquare,
+  faHeart, 
+  faUser
+} from "@fortawesome/free-regular-svg-icons";
+
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons"
 
 // used to store data in cookies
 import Cookies from "js-cookie";
@@ -182,6 +192,10 @@ export {
   faEye, 
   faEyeSlash,
   faPlusSquare,
+  faHeart, 
+  faUser,
+
+  faShoppingBag,
 
   Cookies,
 

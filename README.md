@@ -34,6 +34,9 @@ To use the font awesome,
     npm i --save @fortawesome/react-fontawesome
     npm i --save @fortawesome/react-fontawesome@latest
 
+    npm install @fortawesome/free-solid-svg-icons
+
+
 To store data in cookies
     npm install js-cookie
 

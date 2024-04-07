@@ -1,6 +1,19 @@
-import React from 'react'
+"use client";
+import React, { useEffect, useState } from 'react'
+import { FontAwesomeIcon, Link, faShoppingBag, faHeart, faUser, MONGODB_CATEGORY_HEADING } from "@/app/api/routes/route";
 
 const Navbar = () => {
+  const [categoryHeader, setCategoryHeader] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(MONGODB_CATEGORY_HEADING);
+      const data = await response.json();
+      setCategoryHeader(data.category_heading);
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <nav className="bg-white border-gray-200 dark:bg-gray-200">
@@ -33,9 +46,9 @@ const Navbar = () => {
               </button>
               <div className='hidden w-full md:block md:w-auto mt-1'>
                 <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-200 dark:border-gray-700">
-                  <li><a href="#" className="block py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a></li>
-                  <li><a href="#" className="block py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a></li>
-                  <li><a href="#" className="block py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a></li>
+                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex"><FontAwesomeIcon icon={faUser} /><span className='absolute top-10 right-44'>Profile</span></Link></li>
+                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex"><FontAwesomeIcon icon={faHeart} /><span className='absolute top-10 right-20'>Wishlist</span></Link></li>
+                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex"><FontAwesomeIcon icon={faShoppingBag} /><span className='absolute top-10 right-6'>Bag</span></Link></li>
                 </ul>
               </div>
             </div>
@@ -49,11 +62,13 @@ const Navbar = () => {
               </div>
               <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-black border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-800 dark:placeholder-gray-800 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." />
             </div>
-            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-200 dark:border-gray-700">
-              <li><a href="#" className="block py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a></li>
-              <li><a href="#" className="block py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a></li>
-              <li><a href="#" className="block py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a></li>
-            </ul>
+            {categoryHeader && categoryHeader.map((category_header, index) => (
+              category_header.status === 1 && (
+                <ul key={index} className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-200 dark:border-gray-700">
+                  <li><Link href="#" className="block py-2 px-3 text-black hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 w-40 uppercase text-center">{category_header.name}</Link></li>
+                </ul>
+              )
+            ))}
           </div>
         </div>
       </nav>
