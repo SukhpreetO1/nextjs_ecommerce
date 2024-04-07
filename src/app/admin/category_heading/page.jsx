@@ -5,21 +5,19 @@ import { MONGODB_CATEGORY_HEADING } from '@/app/api/mongodb_api/route';
 
 const CategoryHeading = () => {
   const [categoryHeading, setCategoryheading] = useState([]);
-  const [isChecked, setIsChecked] = useState();
+  const [isChecked, setIsChecked] = useState([]);
 
   useEffect(() => {
-    const fetchCategoryHeading = async () => {
+    const fetchData = async () => {
       const response = await fetch(MONGODB_CATEGORY_HEADING);
       const categoryHeadingData = await response.json();
       setCategoryheading(categoryHeadingData.category_heading);
-    }
-    fetchCategoryHeading();
-  }, [])
 
-  useEffect(() => {
-    const initialCheckedState = categoryHeading.map((category_heading) => category_heading.status === 1 ? true : false);
-    setIsChecked(initialCheckedState);
-  }, [categoryHeading]);
+      const initialCheckedState = categoryHeadingData.category_heading.map(category_heading => category_heading.status === 1);
+      setIsChecked(initialCheckedState);
+    };
+    fetchData();
+  }, []);
 
   const deleteCategoryHeader = async (category_heading_id) => {
     const confirmation = confirm("Are you sure you want to delete this category header?");
@@ -43,9 +41,26 @@ const CategoryHeading = () => {
   const handleCheckboxChange = async (e, category_heading_id) => {
     const status_value = e.target.checked ? 1 : 2;
     setIsChecked(e.target.checked);
-    const updatedCategoryHeading = await axios.put(MONGODB_CATEGORY_HEADING + "/" + category_heading_id, { status: status_value });
-    setCategoryheading(updatedCategoryHeading.data.category_heading);
-    toast.success("Status updated successfully.")
+    try {
+      const response = await axios.put(MONGODB_CATEGORY_HEADING + "/" + category_heading_id, { status: status_value });
+      const updatedCategoryHeadingData = response.data.category_heading;
+
+      setCategoryheading(prevCategoryHeading => {
+        return prevCategoryHeading.map(category_heading => {
+          if (category_heading._id === category_heading_id) {
+            const updatedStatus = updatedCategoryHeadingData.status === 1 ? 2 : 1;
+            return { ...updatedCategoryHeadingData, status: updatedStatus };
+          } else {
+            return category_heading;
+          }
+        });
+      });
+
+      toast.success("Status updated successfully.");
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to update status.");
+    }
   }
 
   return (

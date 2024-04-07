@@ -22,7 +22,6 @@ export async function GET(req, {params}){
 export async function PUT(req, {params}) {
     try {
         const reqBody = await req.json();        
-        console.log(reqBody);
         const { name, status } = reqBody;
         const category_heading = await Category_Heading.findByIdAndUpdate(params.id, {name, status});
         return NextResponse.json({ category_heading }); 
