@@ -15,6 +15,7 @@ import { validate_signup_submit_form } from "@/utils/js/signup";
 import { validate_login_submit_form } from "@/utils/js/login";
 import { validate_forgot_password_submit_form } from "@/utils/js/forgot_password";
 import { validate_category_header } from "@/utils/js/category_header";
+import { validate_category_types } from "@/utils/js/category_types";
 
 // page redirection files
 import {
@@ -32,6 +33,8 @@ import {
   ADMIN_ADD_CATEGORY_HEADING,
   ADMIN_EDIT_CATEGORY_HEADING,
   ADMIN_CATEGORY_TYPES,
+  ADMIN_ADD_CATEGORY_TYPES,
+  ADMIN_EDIT_CATEGORY_TYPES,
   ADMIN_CATEGORIES,
 } from "@/app/api/redirection_route/route";
 
@@ -134,6 +137,7 @@ export {
   validate_login_submit_form,
   validate_forgot_password_submit_form,
   validate_category_header,
+  validate_category_types,
 
   HOME_URL,
   LOGIN_URL,
@@ -149,6 +153,8 @@ export {
   ADMIN_ADD_CATEGORY_HEADING,
   ADMIN_EDIT_CATEGORY_HEADING,
   ADMIN_CATEGORY_TYPES,
+  ADMIN_ADD_CATEGORY_TYPES,
+  ADMIN_EDIT_CATEGORY_TYPES,
   ADMIN_CATEGORIES,
 
   MONGODB_API_SIGNUP,

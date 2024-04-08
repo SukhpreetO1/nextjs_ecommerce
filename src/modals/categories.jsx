@@ -3,7 +3,7 @@ import { mongoose } from "@/app/api/routes/route"
 const categoriesSchema = new mongoose.Schema({
     name: {
         type: String,
-        require: [true, 'Name is required'],
+        required: [true, 'Name is requiredd'],
         unique: true
     },
     category_heading_id: {

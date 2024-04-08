@@ -3,7 +3,7 @@ import { mongoose } from "@/app/api/routes/route"
 const roleSchema = new mongoose.Schema({
     name: {
         type: String,
-        require: [true, 'Role name is required'],
+        required: [true, 'Role name is required'],
         unique: true
     },
     created_at: {

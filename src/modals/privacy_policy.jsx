@@ -3,7 +3,7 @@ import { mongoose } from "@/app/api/routes/route"
 const privacyPolicySchema = new mongoose.Schema({
     details: {
         type: String,
-        require: [true, 'Details is required'],
+        required: [true, 'Details is required'],
         unique: true
     },
     created_at: {
