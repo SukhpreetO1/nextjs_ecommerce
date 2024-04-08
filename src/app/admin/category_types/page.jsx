@@ -1,14 +1,14 @@
 "use client";
-import { ADMIN_ADD_CATEGORY_TYPES, ADMIN_DASHBOARD, FontAwesomeIcon, Link, faPenToSquare, faPlusSquare, faTrashCan } from "@/app/api/routes/route";
+import { ADMIN_ADD_CATEGORY_TYPES, ADMIN_DASHBOARD, FontAwesomeIcon, Link, faPenToSquare, faPlusSquare, faTrashCan, toast } from "@/app/api/routes/route";
 import { MONGODB_CATEGORY_TYPES } from '@/app/api/mongodb_api/route';
 import React, { useEffect, useState } from 'react'
 
-const CategoryHeading = () => {
+const CategoryTypes = () => {
   const [categoryTypes, setCategoryTypes] = useState();
   const [isChecked, setIsChecked] = useState([]);
 
   useEffect(() => {
-    const fetchCategoryHeading = async () => {
+    const fetchCategoryTypes = async () => {
       const response = await fetch(MONGODB_CATEGORY_TYPES);
       const categoryTypesData = await response.json();
       setCategoryTypes(categoryTypesData.category_types);
@@ -16,8 +16,52 @@ const CategoryHeading = () => {
       const initialCheckedState = categoryTypesData.category_types.map(category_type => category_type.status === 1);
       setIsChecked(initialCheckedState);
     }
-    fetchCategoryHeading();
+    fetchCategoryTypes();
   }, [])
+
+  const categoryTypesDelete = async (category_types_id) => {
+    const confirmation = confirm("Are you sure you want to delete this category type?");
+    if (confirmation === true) {
+      const response = await fetch(MONGODB_CATEGORY_TYPES + '/' + category_types_id, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      if (response.ok === true) {
+        const updatedCategoryTypes = categoryTypes.filter(item => item._id !== category_types_id);
+        setCategoryTypes(updatedCategoryTypes);
+        toast.success("Category Type deleted successfully");
+      } else {
+        console.log(error);
+      }
+    }
+  }
+
+  const handleCheckboxChange = async (e, category_types_id) => {
+    const status_value = e.target.checked ? 1 : 2;
+    setIsChecked(e.target.checked);
+    try {
+      const response = await axios.put(MONGODB_CATEGORY_TYPES + "/" + category_types_id, { status: status_value });
+      const updatedCategoryTypesData = response.data.category_types;
+
+      setCategoryTypes(prevCategoryTypes => {
+        return prevCategoryTypes.map(category_type => {
+          if (category_type._id === category_types_id) {
+            const updatedStatus = updatedCategoryTypesData.status === 1 ? 2 : 1;
+            return { ...updatedCategoryTypesData, status: updatedStatus };
+          } else {
+            return category_type;
+          }
+        });
+      });
+
+      toast.success("Status updated successfully.");
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to update status.");
+    }
+  }
   return (
     <>
       <div className='category_types_page sm:ml-60'>
@@ -74,7 +118,13 @@ const CategoryHeading = () => {
                       <td className="px-6 py-4 whitespace-pre">{category_types?.status === 1 ? "Active" : "Inactive" || "-"}</td>
                       <td className="flex items-center px-6 py-4">
                         <Link href="#" className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} /></Link>
-                        <Link href="#" className="text-red-600 mr-2 user_delete_option"><FontAwesomeIcon icon={faTrashCan} /></Link>
+                        <Link href="#" className="text-red-600 mr-2 user_delete_option" onClick={() => categoryTypesDelete(category_types?._id)}><FontAwesomeIcon icon={faTrashCan} /></Link>
+                        <div className="toggle_buttom">
+                          <label className="inline-flex items-center mb-5 cursor-pointer">
+                            <input type="checkbox" value={category_types.status} className="sr-only peer" checked={isChecked[index]} onChange={(e) => handleCheckboxChange(e, category_types._id)} />
+                            <div className="relative top-3 w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 "> </div>
+                          </label>
+                        </div>
                       </td>
                     </tr>
                   ))
@@ -92,4 +142,4 @@ const CategoryHeading = () => {
   )
 }
 
-export default CategoryHeading
+export default CategoryTypes

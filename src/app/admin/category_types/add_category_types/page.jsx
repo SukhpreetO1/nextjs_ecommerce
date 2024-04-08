@@ -85,14 +85,14 @@ const AddCategorytypes = () => {
                         <div className="add_category_name">
                             <InputField label_heading="Category Types Name " id="add_category_type_name" className="add_category_type_name" name="name" placeholder="Add Category Type Name..." div_name="add_category_type_name" value={formData.name} onChange={handleInputChange} error={errors.name} />
                         </div>
-                        <div className="add_category_header_dropdown_name">
+                        <div className="add_category_header_dropdown_name mb-6">
                             {categoryHeaders ? (
                                 <div>
                                     <fieldset>
                                         <h1 className='block text-sm font-medium leading-6 text-gray-900 mb-2'>Choose Category Header <span className='important_mark text-red-500'>*</span></h1>
-                                        <div className="relative border border-gray-300 text-gray-800 bg-white shadow-lg rounded-sm">
+                                        <div className="relative border border-gray-300 text-gray-800 shadow-lg rounded-sm">
                                             <label htmlFor="category_heading_id"></label>
-                                            <select className="category_heading_id appearance-none w-full py-1 px-2 bg-white" name="category_heading_id" id="category_heading_id" value={formData.category_heading_id} onChange={handleInputChange} >
+                                            <select className="category_heading_id appearance-none w-full py-1 px-2 rounded-sm" name="category_heading_id" id="category_heading_id" value={formData.category_heading_id} onChange={handleInputChange} >
                                                 <option value="" disabled>Please select one category heading...</option>
                                                 {categoryHeaders.map((category_header, index) => (
                                                     <option key={index} value={category_header._id}>{category_header.name}</option>
