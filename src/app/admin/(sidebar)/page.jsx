@@ -41,7 +41,7 @@ const AdminSidebar = () => {
         </button>
 
         <aside id="admin_sidebar" className={`fixed top-0 left-0 z-40 w-56 border-r-2 border-gray-300 h-screen transition-transform ${sidebarOpen ? '' : '-translate-x-full sm:translate-x-0'}`} aria-label="Sidebar" >
-          <div className="h-full py-4 overflow-y-auto bg-gray-50 dark:bg-white">
+          <div className="h-full py-4 overflow-y-auto bg-gray-200 dark:bg-gray-100">
             <ul className="space-y-2 font-medium">
               <li>
                 <Link href={ADMIN_DASHBOARD} className={`flex items-center p-2 ps-4 text-gray-900 hover:bg-gray-100 dark:hover:bg-blue-500 dark:hover:text-white group ${isActive('dashboard') ? 'bg-blue-500 text-white ' : ''}`} onClick={() => handleItemClick('dashboard')}>

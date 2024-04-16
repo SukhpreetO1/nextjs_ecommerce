@@ -1,5 +1,5 @@
 "use client";
-import { ADMIN_ADD_CATEGORY_TYPES, ADMIN_DASHBOARD, FontAwesomeIcon, Link, faPenToSquare, faPlusSquare, faTrashCan, toast } from "@/app/api/routes/route";
+import { ADMIN_ADD_CATEGORY_TYPES, ADMIN_DASHBOARD, ADMIN_EDIT_CATEGORY_TYPES, FontAwesomeIcon, Link, axios, faPenToSquare, faPlusSquare, faTrashCan, toast } from "@/app/api/routes/route";
 import { MONGODB_CATEGORY_TYPES } from '@/app/api/mongodb_api/route';
 import React, { useEffect, useState } from 'react'
 
@@ -43,18 +43,18 @@ const CategoryTypes = () => {
     setIsChecked(e.target.checked);
     try {
       const response = await axios.put(MONGODB_CATEGORY_TYPES + "/" + category_types_id, { status: status_value });
-      const updatedCategoryTypesData = response.data.category_types;
+      const updatedCategoryTypesData = response.data.category_type;
 
-      setCategoryTypes(prevCategoryTypes => {
-        return prevCategoryTypes.map(category_type => {
-          if (category_type._id === category_types_id) {
-            const updatedStatus = updatedCategoryTypesData.status === 1 ? 2 : 1;
-            return { ...updatedCategoryTypesData, status: updatedStatus };
-          } else {
-            return category_type;
-          }
-        });
-      });
+      // setCategoryTypes(prevCategoryTypes => {
+      //   return prevCategoryTypes.map(category_type => {
+      //     if (category_type._id === category_types_id) {
+      //       const updatedStatus = updatedCategoryTypesData.status === 1 ? 2 : 1;
+      //       return { ...updatedCategoryTypesData, status: updatedStatus };
+      //     } else {
+      //       return category_type;
+      //     }
+      //   });
+      // });
 
       toast.success("Status updated successfully.");
     } catch (error) {
@@ -95,7 +95,7 @@ const CategoryTypes = () => {
             </div>
 
             <div className="add_category_heading_option text-end sm:mr-16 mr-4 mb-4 sm:w-0 w-full">
-              <Link href={ADMIN_ADD_CATEGORY_TYPES}><FontAwesomeIcon icon={faPlusSquare} className='text-4xl plus_icon hover:text-blue-700' /></Link>
+              <Link href={ADMIN_ADD_CATEGORY_TYPES}><FontAwesomeIcon icon={faPlusSquare} className='text-4xl plus_icon hover:text-blue-700' title='Add Category Types'/></Link>
             </div>
           </div>
 
@@ -112,16 +112,16 @@ const CategoryTypes = () => {
               <tbody>
                 {categoryTypes && categoryTypes.length > 0 ? (
                   categoryTypes.map((category_types, index) => (
-                    <tr key={category_types?.id || index} className="text-gray-600">
+                    <tr key={category_types?._id || index} className="text-gray-600">
                       <td className="px-6 py-4 whitespace-pre">{category_types?.name || "-"}</td>
                       <td className="px-6 py-4 whitespace-pre">{category_types?.category_heading_id.name || "-"}</td>
                       <td className="px-6 py-4 whitespace-pre">{category_types?.status === 1 ? "Active" : "Inactive" || "-"}</td>
                       <td className="flex items-center px-6 py-4">
-                        <Link href="#" className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} /></Link>
-                        <Link href="#" className="text-red-600 mr-2 user_delete_option" onClick={() => categoryTypesDelete(category_types?._id)}><FontAwesomeIcon icon={faTrashCan} /></Link>
+                        <Link href={`${ADMIN_EDIT_CATEGORY_TYPES}/${category_types?._id}`} className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} title='Edit Category Types'/></Link>
+                        <Link href="#" className="text-red-600 mr-2 user_delete_option" onClick={() => categoryTypesDelete(category_types?._id)}><FontAwesomeIcon icon={faTrashCan} title='Delete Category Types'/></Link>
                         <div className="toggle_buttom">
                           <label className="inline-flex items-center mb-5 cursor-pointer">
-                            <input type="checkbox" value={category_types.status} className="sr-only peer" checked={isChecked[index]} onChange={(e) => handleCheckboxChange(e, category_types._id)} />
+                            <input type="checkbox" value={category_types.status} className="sr-only peer" id="toggle_button" checked={isChecked[index]} onChange={(e) => handleCheckboxChange(e, category_types._id)} />
                             <div className="relative top-3 w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 "> </div>
                           </label>
                         </div>
