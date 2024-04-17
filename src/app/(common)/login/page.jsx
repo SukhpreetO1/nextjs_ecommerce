@@ -1,5 +1,5 @@
 "use client";
-import { InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, Cookies, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider, axios, jwt, signInWithPhoneNumber, RecaptchaVerifier, PhoneAuthProvider, USER_DASHBOARD, MONGODB_API_LOGIN, MONGODB_API_LOGIN_WITH_GOOGLE } from '@/app/api/routes/route';
+import { InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, Cookies, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider, axios, jwt, signInWithPhoneNumber, RecaptchaVerifier, PhoneAuthProvider, USER_DASHBOARD, MONGODB_API_LOGIN, MONGODB_API_LOGIN_WITH_GOOGLE, MONGODB_API_LOGIN_WITH_PHONE } from '@/app/api/routes/route';
 import React, { useState, useEffect } from 'react';
 
 const Login = () => {
@@ -52,8 +52,8 @@ const Login = () => {
     try {
       await signInWithPopup(auth, provider);
       const response = await axios.post(MONGODB_API_LOGIN_WITH_GOOGLE, {
-        fullname : auth.currentUser.displayName || '',
-        email : auth.currentUser.email || '',
+        fullname: auth.currentUser.displayName || '',
+        email: auth.currentUser.email || '',
       });
       if (response.data.message === "Registered Successfully.") {
         Cookies.set('currentUserToken', JSON.stringify(response.data.token), { expires: expirationTime });
@@ -71,18 +71,56 @@ const Login = () => {
   const handleSendCode = async () => {
     const recaptchaVerifier = new RecaptchaVerifier(auth, 'send-code-button', { size: 'invisible' });
     try {
-      const verificationId = await signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier);
+      const verification_id = await signInWithPhoneNumber(auth, phoneNumber, recaptchaVerifier);
       toast.success("OTP sent successfully")
-      setVerificationId(verificationId);
+      setVerificationId(verification_id);
     } catch (error) {
       toast.error("Phone number is not correct" + error)
       console.error(error);
     }
   };
 
-  const signInWithPhone = () => {
-    // router.push(LOGIN_URL);
-  }
+  const signInWithPhone = async () => {
+    let validation_errors = {};
+    let isValid = true;
+
+    if (!phoneNumber.trim()) {
+      validation_errors.mobile_number = "Mobile number is required";
+      isValid = false;
+    } else if (!/^\+\d{12}$/i.test(phoneNumber)) {
+      validation_errors.mobile_number = "Mobile number should be 13 digits including country code";
+      isValid = false;
+    }
+
+    if (!verificationCode.trim()) {
+      validation_errors.verificationCode = "OTP is required";
+      isValid = false;
+    }
+
+    if (isValid) {
+      const credential = PhoneAuthProvider.credential(verificationId.verificationId, verificationCode);
+      try {
+        const confirmationResult = await signInWithCredential(auth, credential);
+        const expirationTime = new Date();
+        expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
+        const response = await axios.post(MONGODB_API_LOGIN_WITH_PHONE, {
+          mobile_number: phoneNumber
+        })
+        if (response.data.message === "Registered Successfully.") {
+          Cookies.set('currentUserToken', JSON.stringify(response.data.token), { expires: expirationTime });
+          router.push(USER_DASHBOARD);
+          toast.success("Login successfully.")
+        } else {
+          console.log(response.data.error);
+          toast.error("Invalid credential.");
+        }
+      } catch (err) {
+        console.log(err.response.data.error);
+      }
+    } else {
+      setErrors(validation_errors);
+    }
+  };
 
   return (
     <>

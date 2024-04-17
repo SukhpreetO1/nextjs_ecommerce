@@ -66,3 +66,6 @@ To Kill the terminal in windows
     netstat -ano | findstr :3000
 
     taskkill /PID <PID> /F
+
+To add the checklist of the password
+    npm install react-password-checklist --save
