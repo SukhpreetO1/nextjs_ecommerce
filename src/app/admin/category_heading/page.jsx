@@ -13,7 +13,7 @@ const CategoryHeading = () => {
       const categoryHeadingData = await response.json();
       setCategoryheading(categoryHeadingData.category_heading);
 
-      const initialCheckedState = categoryHeadingData.category_heading.map(category_heading => category_heading.status === 1);
+      const initialCheckedState = categoryHeadingData.length > 0 ? categoryHeadingData.category_heading.map(category_heading => category_heading.status === 1) : '';
       setIsChecked(initialCheckedState);
     };
     fetchData();

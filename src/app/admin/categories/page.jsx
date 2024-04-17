@@ -1,60 +1,60 @@
 "use client";
-import { ADMIN_ADD_CATEGORY_TYPES, ADMIN_DASHBOARD, ADMIN_EDIT_CATEGORY_TYPES, FontAwesomeIcon, Link, axios, faPenToSquare, faPlusSquare, faTrashCan, toast } from "@/app/api/routes/route";
-import { MONGODB_CATEGORY_TYPES } from '@/app/api/mongodb_api/route';
 import React, { useEffect, useState } from 'react'
+import { FontAwesomeIcon, Link, faPenToSquare, faTrashCan, faPlusSquare, ADMIN_ADD_CATEGORIES, ADMIN_EDIT_CATEGORIES, toast, axios, ADMIN_DASHBOARD } from "@/app/api/routes/route";
+import { MONGODB_CATEGORIES } from '@/app/api/mongodb_api/route';
 
-const CategoryTypes = () => {
-  const [categoryTypes, setCategoryTypes] = useState();
+const Categories = () => {
+  const [categories, setCategories] = useState([]);
   const [isChecked, setIsChecked] = useState([]);
 
   useEffect(() => {
-    const fetchCategoryTypes = async () => {
-      const response = await fetch(MONGODB_CATEGORY_TYPES);
-      const categoryTypesData = await response.json();
-      setCategoryTypes(categoryTypesData.category_types);
+    const fetchData = async () => {
+      const response = await fetch(MONGODB_CATEGORIES);
+      const categoriesData = await response.json();
+      setCategories(categoriesData.categories_data);
 
-      const initialCheckedState = categoryTypesData.length > 0 ? categoryTypesData.category_types.map(category_type => category_type.status === 1) : '';
+      const initialCheckedState = categoriesData.length > 0 ? categoriesData.categories.map(categories => categories.status === 1) : '';
       setIsChecked(initialCheckedState);
-    }
-    fetchCategoryTypes();
-  }, [])
+    };
+    fetchData();
+  }, []);
 
-  const categoryTypesDelete = async (category_types_id) => {
-    const confirmation = confirm("Are you sure you want to delete this category type?");
+  const deleteCategoryHeader = async (categories_id) => {
+    const confirmation = confirm("Are you sure you want to delete this category?");
     if (confirmation === true) {
-      const response = await fetch(MONGODB_CATEGORY_TYPES + '/' + category_types_id, {
+      const response = await fetch(MONGODB_CATEGORIES + '/' + categories_id, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
         }
       });
       if (response.ok === true) {
-        const updatedCategoryTypes = categoryTypes.filter(item => item._id !== category_types_id);
-        setCategoryTypes(updatedCategoryTypes);
-        toast.success("Category Type deleted successfully");
+        const updatedCategories = categories.filter(item => item._id !== categories_id);
+        setCategories(updatedCategories);
+        toast.success("Category deleted deleted successfully");
       } else {
         console.log(error);
       }
     }
   }
 
-  const handleCheckboxChange = async (e, category_types_id) => {
+  const handleCheckboxChange = async (e, categories_id) => {
     const status_value = e.target.checked ? 1 : 2;
     setIsChecked(e.target.checked);
     try {
-      const response = await axios.put(MONGODB_CATEGORY_TYPES + "/" + category_types_id, { status: status_value });
-      const updatedCategoryTypesData = response.data.category_type;
+      const response = await axios.put(MONGODB_CATEGORIES + "/" + categories_id, { status: status_value });
+      const updatedCategoriesData = response.data.categories_id;
 
-      // setCategoryTypes(prevCategoryTypes => {
-      //   return prevCategoryTypes.map(category_type => {
-      //     if (category_type._id === category_types_id) {
-      //       const updatedStatus = updatedCategoryTypesData.status === 1 ? 2 : 1;
-      //       return { ...updatedCategoryTypesData, status: updatedStatus };
-      //     } else {
-      //       return category_type;
-      //     }
-      //   });
-      // });
+      setCategories(prevCategories => {
+        return prevCategories.map(categories_id => {
+          if (categories_id._id === categories_id) {
+            const updatedStatus = updatedCategoriesData.status === 1 ? 2 : 1;
+            return { ...updatedCategoriesData, status: updatedStatus };
+          } else {
+            return categories_id;
+          }
+        });
+      });
 
       toast.success("Status updated successfully.");
     } catch (error) {
@@ -62,14 +62,14 @@ const CategoryTypes = () => {
       toast.error("Failed to update status.");
     }
   }
+
   return (
     <>
-      <div className='category_types_page sm:ml-60'>
-        <div className="category_types_title">
-          <h1 className='text-5xl font-bold leading-loose text-center py-3'>Category Types</h1>
+      <div className='categories_page sm:ml-60'>
+        <div className="categories_title">
+          <h1 className='text-5xl font-bold leading-loose text-center py-3'>Categories</h1>
         </div>
-        <div className="category_types_data">
-
+        <div className="categories_data">
           <div className='flex justify-between'>
             <div className='admin_breadcrumbs hidden sm:block w-fit ml-4 -mt-2'>
               <div className="flex px-5 py-3 text-black border border-gray-200 rounded-lg bg-gray-50 dark:bg-white dark:white" aria-label="Breadcrumb">
@@ -87,15 +87,15 @@ const CategoryTypes = () => {
                       <svg className="rtl:rotate-180  w-3 h-3 mx-1 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
                       </svg>
-                      <span className="ms-1 text-sm font-medium text-black md:ms-2 dark:text-gray-400">Category Types</span>
+                      <span className="ms-1 text-sm font-medium text-black md:ms-2 dark:text-gray-400">Categories</span>
                     </div>
                   </li>
                 </ol>
               </div>
             </div>
 
-            <div className="add_category_heading_option text-end sm:mr-16 mr-4 mb-4 sm:w-0 w-full">
-              <Link href={ADMIN_ADD_CATEGORY_TYPES}><FontAwesomeIcon icon={faPlusSquare} className='text-4xl plus_icon hover:text-blue-700' title='Add Category Types'/></Link>
+            <div className="add_categories_option text-end sm:mr-16 mr-4 mb-4 sm:w-0 w-full">
+              <Link href={ADMIN_ADD_CATEGORIES}><FontAwesomeIcon icon={faPlusSquare} className='text-4xl plus_icon hover:text-blue-700' /></Link>
             </div>
           </div>
 
@@ -104,24 +104,26 @@ const CategoryTypes = () => {
               <thead className="text-gray-600 uppercase border-b-2">
                 <tr>
                   <th className="px-6 py-4 whitespace-pre">Name</th>
+                  <th className="px-6 py-4 whitespace-pre">Category Type</th>
                   <th className="px-6 py-4 whitespace-pre">Category Heading</th>
                   <th className="px-6 py-4 whitespace-pre">Status</th>
                   <th className="px-6 py-4 whitespace-pre">Action</th>
                 </tr>
               </thead>
               <tbody>
-                {categoryTypes && categoryTypes.length > 0 ? (
-                  categoryTypes.map((category_types, index) => (
-                    <tr key={category_types?._id || index} className="text-gray-600">
-                      <td className="px-6 py-4 whitespace-pre">{category_types?.name || "-"}</td>
-                      <td className="px-6 py-4 whitespace-pre">{category_types?.category_heading_id.name || "-"}</td>
-                      <td className="px-6 py-4 whitespace-pre">{category_types?.status === 1 ? "Active" : "Inactive" || "-"}</td>
-                      <td className="flex items-center px-6 py-4">
-                        <Link href={`${ADMIN_EDIT_CATEGORY_TYPES}/${category_types?._id}`} className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} title='Edit Category Types'/></Link>
-                        <Link href="#" className="text-red-600 mr-2 user_delete_option" onClick={() => categoryTypesDelete(category_types?._id)}><FontAwesomeIcon icon={faTrashCan} title='Delete Category Types'/></Link>
+                {categories && categories.length > 0 ? (
+                  categories?.map((category, index) => (
+                    <tr key={index} className="text-gray-600 border-b-2 border-gray-200">
+                      <td className="px-6 py-4 whitespace-pre">{category?.name || "-"}</td>
+                      <td className="px-6 py-4 whitespace-pre">{category?.name || "-"}</td>
+                      <td className="px-6 py-4 whitespace-pre">{s?.name || "-"}</td>
+                      <td className="px-6 py-4 whitespace-pre">{category?.status === 1 ? "Active" : "Inactive" || "-"}</td>
+                      <td className="flex items-center px-6 py-2">
+                        <Link href={`${ADMIN_EDIT_CATEGORIES}/${category?._id}`} className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} title='Edit Category Header' /></Link>
+                        <Link href="#" className="text-red-600 mr-2 user_delete_option" onClick={() => deleteCategoryHeader(category?._id)}><FontAwesomeIcon icon={faTrashCan} title='Delete Category' /></Link>
                         <div className="toggle_buttom">
                           <label className="inline-flex items-center mb-5 cursor-pointer">
-                            <input type="checkbox" value={category_types.status} className="sr-only peer" id="toggle_button" checked={isChecked[index]} onChange={(e) => handleCheckboxChange(e, category_types._id)} />
+                            <input type="checkbox" value={category.status} className="sr-only peer" checked={isChecked[index]} onChange={(e) => handleCheckboxChange(e, category._id)} />
                             <div className="relative top-3 w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-200 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 "> </div>
                           </label>
                         </div>
@@ -129,8 +131,8 @@ const CategoryTypes = () => {
                     </tr>
                   ))
                 ) : (
-                  <tr>
-                    <td colSpan="4" className="px-6 py-4 text-center text-gray-600">No data found</td>
+                  <tr key="no-data">
+                    <td colSpan="6" className="px-6 py-4 text-center text-gray-600">No data found</td>
                   </tr>
                 )}
               </tbody>
@@ -142,4 +144,4 @@ const CategoryTypes = () => {
   )
 }
 
-export default CategoryTypes
+export default Categories

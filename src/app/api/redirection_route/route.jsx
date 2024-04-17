@@ -30,3 +30,5 @@ export const ADMIN_ADD_CATEGORY_TYPES = "/admin/category_types/add_category_type
 export const ADMIN_EDIT_CATEGORY_TYPES = "/admin/category_types/edit_category_types";
 
 export const ADMIN_CATEGORIES = "/admin/categories";
+export const ADMIN_ADD_CATEGORIES = "/admin/categories/add_categories";
+export const ADMIN_EDIT_CATEGORIES = "/admin/categories/edit_categories";

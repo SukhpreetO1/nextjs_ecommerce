@@ -45,5 +45,8 @@ export const config = {
     "/admin/category_types",
     "/admin/category_types/add_category_types",
     "/admin/category_types/edit_category_types/:id",
+    "/admin/categories",
+    "/admin/categories/add_categories",
+    "/admin/categories/edit_categories/:id",
   ],
 }
