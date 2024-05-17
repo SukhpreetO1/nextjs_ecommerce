@@ -39,10 +39,12 @@ import {
   MONGODB_API_SIGNUP,
   MONGODB_API_LOGIN,
   MONGODB_API_LOGIN_WITH_GOOGLE,
+  MONGODB_API_LOGIN_WITH_PHONE_NUMBER,
   MONGODB_USERS_DETAILS,
   MONGODB_CATEGORY_HEADING,
   MONGODB_CATEGORY_TYPES,
   MONGODB_CATEGORIES,
+  MONGODB_ROLE_DATA,
 } from "@/app/api/mongodb_api/route";
 
 import Navbar from "@/app/(users)/(navbar)/page";
@@ -113,7 +115,7 @@ import Terms_and_conditions from "@/modals/terms_and_conditions";
 import User from "@/modals/users";
 import Category_Heading from "@/modals/category_heading";
 import Category_Types from "@/modals/category_types";
-import Categories from "@/modals/Categories";
+// import Categories from "@/modals/Categories";
 
 import Sidebar from "@/app/admin/(sidebar)/page";
 
@@ -154,10 +156,12 @@ export {
   MONGODB_API_SIGNUP,
   MONGODB_API_LOGIN,
   MONGODB_API_LOGIN_WITH_GOOGLE,
+  MONGODB_API_LOGIN_WITH_PHONE_NUMBER,
   MONGODB_USERS_DETAILS,
   MONGODB_CATEGORY_HEADING,
   MONGODB_CATEGORY_TYPES,
   MONGODB_CATEGORIES,
+  MONGODB_ROLE_DATA,
 
   Navbar,
 
@@ -216,7 +220,7 @@ export {
   User, 
   Category_Heading,
   Category_Types,
-  Categories,
+  // Categories,
 
   Sidebar,
 };

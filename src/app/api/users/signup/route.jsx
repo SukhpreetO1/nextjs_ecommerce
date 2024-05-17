@@ -5,7 +5,7 @@ connect();
 export async function POST(request) {
     try {
         const reqBody = await request.json();        
-        const { first_name, last_name, email, username, date_of_birth, mobile_number, gender, hobbies, password } = reqBody;
+        const { first_name, last_name, email, username, date_of_birth, mobile_number, gender, hobbies, password, role_id } = reqBody;
 
         const existingUser = await User.findOne({
             $or: [
@@ -34,6 +34,7 @@ export async function POST(request) {
             last_name,
             email,
             username,
+            role_id,
             date_of_birth,
             mobile_number,
             gender,

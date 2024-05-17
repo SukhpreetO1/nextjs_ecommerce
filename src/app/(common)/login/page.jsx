@@ -80,9 +80,60 @@ const Login = () => {
     }
   };
 
-  const signInWithPhone = () => {
-    // router.push(LOGIN_URL);
-  }
+  const signInWithPhone = async () => {
+    let validation_errors = {};
+    let isValid = true;
+
+    if (!phoneNumber.trim()) {
+      validation_errors.mobile_number = "Mobile number is required";
+      isValid = false;
+    } else if (!/^\+\d{12}$/i.test(phoneNumber)) {
+      validation_errors.mobile_number = "Mobile number should be 13 digits including country code";
+      isValid = false;
+    }
+
+    if (!verificationCode.trim()) {
+      validation_errors.verificationCode = "OTP is required";
+      isValid = false;
+    }
+
+    if (isValid) {
+      const credential = PhoneAuthProvider.credential(verificationId.verificationId, verificationCode);
+      try {
+        const confirmationResult = await signInWithCredential(auth, credential);
+        const expirationTime = new Date();
+        expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
+        const response = await axios.post(MONGODB_API_LOGIN_WITH_PHONE_NUMBER, {
+          mobile_number: phoneNumber,
+        });
+        if (response.data.message === "Registered Successfully.") {
+          Cookies.set('currentUserToken', JSON.stringify(response.data.token), { expires: expirationTime });
+          setShowModal(false);
+          setVerificationCode('');
+          setPhoneNumber('');
+          router.push(USER_DASHBOARD);
+          toast.success("Login successfully.")
+        } else {
+          setShowModal(false);
+          setVerificationCode('');
+          setPhoneNumber('');
+          console.log(response.data.error);
+          toast.error("Invalid mobile number.");
+        }
+      } catch (error) {
+        if (error.code === "auth/code-expired") {
+          toast.error("OTP Expire.", { position: "top-right" })
+        } else if (error.code === "auth/invalid-verification-code") {
+          toast.error("Invalid OTP", { position: "top-right" })
+        }
+        setShowModal(false);
+        setVerificationCode('');
+        setPhoneNumber('');
+      }
+    } else {
+      setErrors(validation_errors);
+    }
+  };
 
   return (
     <>
