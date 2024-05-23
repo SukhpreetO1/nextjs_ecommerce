@@ -1,4 +1,4 @@
-import { Categories, NextResponse, connect } from "@/app/api/routes/route";
+import { Categories, NextResponse, connect, Category_Heading, Category_Types } from "@/app/api/routes/route";
 connect();
 
 export async function DELETE(req, {params}) {
@@ -12,8 +12,9 @@ export async function DELETE(req, {params}) {
 
 export async function GET(req, {params}){
     try {
-        const categories = await Categories.findById(params.id);
-        return NextResponse.json({ categories });
+        const category_heading = await Category_Heading.findById(params.id);
+        const category_types = await Category_Types.find({ category_heading_id: category_heading._id });
+        return NextResponse.json({ category_types });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 })
     }
