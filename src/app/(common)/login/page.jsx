@@ -103,19 +103,32 @@ const Login = () => {
         const confirmationResult = await signInWithCredential(auth, credential);
         const expirationTime = new Date();
         expirationTime.setTime(expirationTime.getTime() + 30 * 60 * 1000);
-        const response = await axios.post(MONGODB_API_LOGIN_WITH_PHONE, {
-          mobile_number: phoneNumber
-        })
+        const response = await axios.post(MONGODB_API_LOGIN_WITH_PHONE_NUMBER, {
+          mobile_number: phoneNumber,
+        });
         if (response.data.message === "Registered Successfully.") {
           Cookies.set('currentUserToken', JSON.stringify(response.data.token), { expires: expirationTime });
+          setShowModal(false);
+          setVerificationCode('');
+          setPhoneNumber('');
           router.push(USER_DASHBOARD);
           toast.success("Login successfully.")
         } else {
+          setShowModal(false);
+          setVerificationCode('');
+          setPhoneNumber('');
           console.log(response.data.error);
-          toast.error("Invalid credential.");
+          toast.error("Invalid mobile number.");
         }
-      } catch (err) {
-        console.log(err.response.data.error);
+      } catch (error) {
+        if (error.code === "auth/code-expired") {
+          toast.error("OTP Expire.", { position: "top-right" })
+        } else if (error.code === "auth/invalid-verification-code") {
+          toast.error("Invalid OTP", { position: "top-right" })
+        }
+        setShowModal(false);
+        setVerificationCode('');
+        setPhoneNumber('');
       }
     } else {
       setErrors(validation_errors);
