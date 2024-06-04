@@ -31,13 +31,14 @@ export async function POST(request) {
         const token = await jwt.sign(tokenData, process.env.NEXT_PUBLIC_TOKEN_SECRET, {expiresIn: "30min"})
 
         let redirectUrl;
+        let token_name;
         if(tokenData.role_name === "Super Admin"){
             redirectUrl = ADMIN_DASHBOARD;
             token_name = "current_super_admin_token"
         } else if (tokenData.role_name === "Admin") {
             redirectUrl = ADMIN_DASHBOARD;
             token_name = "current_admin_token"
-        } else if (tokenData.role_name === "Users") {
+        } else if (tokenData.role_name === "User") {
             redirectUrl = USER_DASHBOARD;
             token_name = "current_user_token"
         }

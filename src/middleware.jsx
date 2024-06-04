@@ -9,7 +9,7 @@ export function middleware(request) {
   const token = request.cookies.get('current_user_token');
   const admin_token = request.cookies.get('current_admin_token');
 
-  if (!(token || admin_token) && !isPublicPath) {
+  if (!(token || admin_token) && !(isPublicPath || path === HOME_URL)) {
     return NextResponse.redirect(new URL(LOGIN_URL, request.url));
   }
 
@@ -34,7 +34,7 @@ export const config = {
     "/forgot_password",
     "/dashboard",
 
-    "/admin/dashboard",
+    "/admin",
     "/admin/user_details",
     "/admin/category_heading",
     "/admin/category_heading/add_category_heading",

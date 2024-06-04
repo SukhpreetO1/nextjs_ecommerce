@@ -1,10 +1,10 @@
 import React from 'react'
-import { Navbar } from "@/app/api/routes/route"
+import { Navbar, USER_DASHBOARD } from "@/app/api/routes/route"
 const HOMEPAGE = () => {
   return (
     <>
       <Navbar />
-      HOMEPAGE
+      <USER_DASHBOARD />
     </>
   )
 }

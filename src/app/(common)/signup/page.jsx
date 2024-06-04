@@ -62,7 +62,6 @@ const Signup = () => {
 
         try {
             const role_response = await axios.post(MONGODB_ROLE_DATA, formData);
-            console.log("role_response", role_response);
             const role_id = role_response.data._id;
             const response = await axios.post(MONGODB_API_SIGNUP, { ...formData, role_id });
             const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
