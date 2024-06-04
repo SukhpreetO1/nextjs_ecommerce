@@ -68,4 +68,4 @@ To Kill the terminal in windows
     taskkill /PID <PID> /F
 
 To add the checklist of the password
-    npm install react-password-checklist --save
+    npm install react-password-checklist

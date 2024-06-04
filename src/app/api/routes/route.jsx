@@ -120,7 +120,7 @@ import Terms_and_conditions from "@/modals/terms_and_conditions";
 import User from "@/modals/users";
 import Category_Heading from "@/modals/category_heading";
 import Category_Types from "@/modals/category_types";
-import Categories from "@/modals/Categories";
+import Categories from "@/modals/categories";
 
 import Sidebar from "@/app/admin/(sidebar)/page";
 

@@ -33,12 +33,15 @@ export async function POST(request) {
         let redirectUrl;
         if(tokenData.role_name === "Super Admin"){
             redirectUrl = ADMIN_DASHBOARD;
+            token_name = "current_super_admin_token"
         } else if (tokenData.role_name === "Admin") {
             redirectUrl = ADMIN_DASHBOARD;
+            token_name = "current_admin_token"
         } else if (tokenData.role_name === "Users") {
             redirectUrl = USER_DASHBOARD;
+            token_name = "current_user_token"
         }
-        return NextResponse.json({ token, redirectUrl });
+        return NextResponse.json({ token, redirectUrl, token_name });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 })
     }

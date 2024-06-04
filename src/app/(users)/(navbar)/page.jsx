@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react'
-import { FontAwesomeIcon, Link, faShoppingBag, faHeart, faUser, MONGODB_CATEGORY_HEADING } from "@/app/api/routes/route";
+import { FontAwesomeIcon, Link, faShoppingBag, faHeart, faUser, MONGODB_CATEGORY_HEADING, Image } from "@/app/api/routes/route";
 
 const Navbar = () => {
   const [categoryHeader, setCategoryHeader] = useState();
@@ -19,7 +19,7 @@ const Navbar = () => {
       <nav className="bg-white border-gray-200 dark:bg-gray-200">
         <div className="flex flex-wrap items-center justify-between mx-auto p-4 px-16">
           <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
+            <Image src="https://flowbite.com/docs/images/logo.svg" className="h-8 w-auto" width={0} height={0} alt="Flowbite Logo" />
           </a>
           <div className="flex md:order-2">
             <div>
@@ -46,9 +46,9 @@ const Navbar = () => {
               </button>
               <div className='hidden w-full md:block md:w-auto mt-1'>
                 <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-200 dark:border-gray-700">
-                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex"><FontAwesomeIcon icon={faUser} /><span className='absolute top-10 right-56 text-xs'>Profile</span></Link></li>
-                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex"><FontAwesomeIcon icon={faHeart} /><span className='absolute top-10 right-36 text-xs'>Wishlist</span></Link></li>
-                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex"><FontAwesomeIcon icon={faShoppingBag} /><span className='absolute top-10 right-20 text-xs'>Bag</span></Link></li>
+                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 grid gap-1 justify-items-center"><FontAwesomeIcon icon={faUser} /><span className='text-xs'>Profile</span></Link></li>
+                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 grid gap-1 justify-items-center"><FontAwesomeIcon icon={faHeart} /><span className='text-xs'>Wishlist</span></Link></li>
+                  <li className='px-4'><Link href="#" className="py-2 px-3 text-black rounded hover:bg-black md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-black md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 grid gap-1 justify-items-center"><FontAwesomeIcon icon={faShoppingBag} /><span className='text-xs'>Bag</span></Link></li>
                 </ul>
               </div>
             </div>

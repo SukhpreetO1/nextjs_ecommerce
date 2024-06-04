@@ -1,6 +1,6 @@
 "use client";
-import { InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, Cookies, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider, axios, jwt, signInWithPhoneNumber, RecaptchaVerifier, PhoneAuthProvider, USER_DASHBOARD, MONGODB_API_LOGIN, MONGODB_API_LOGIN_WITH_GOOGLE, MONGODB_API_LOGIN_WITH_PHONE } from '@/app/api/routes/route';
 import React, { useState, useEffect } from 'react';
+import { InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, Cookies, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider, axios, signInWithPhoneNumber, RecaptchaVerifier, PhoneAuthProvider, USER_DASHBOARD, MONGODB_API_LOGIN, MONGODB_API_LOGIN_WITH_GOOGLE, MONGODB_API_LOGIN_WITH_PHONE_NUMBER } from '@/app/api/routes/route';
 
 const Login = () => {
   const router = useRouter();
@@ -31,7 +31,7 @@ const Login = () => {
         setDisabled(true);
         await signInWithEmailAndPassword(auth, formData.email, formData.password);
         const response = await axios.post(MONGODB_API_LOGIN, formData);
-        Cookies.set('currentUserToken', JSON.stringify(response.data.token), { expires: expirationTime });
+        Cookies.set(response.data.token_name, JSON.stringify(response.data.token), { expires: expirationTime });
         router.push(response.data.redirectUrl);
         setDisabled(false);
         toast.success("Login successfully.")
@@ -56,7 +56,7 @@ const Login = () => {
         email: auth.currentUser.email || '',
       });
       if (response.data.message === "Registered Successfully.") {
-        Cookies.set('currentUserToken', JSON.stringify(response.data.token), { expires: expirationTime });
+        Cookies.set('current_user_token', JSON.stringify(response.data.token), { expires: expirationTime });
         router.push(USER_DASHBOARD);
         toast.success("Login successfully.")
       } else {
@@ -107,7 +107,7 @@ const Login = () => {
           mobile_number: phoneNumber,
         });
         if (response.data.message === "Registered Successfully.") {
-          Cookies.set('currentUserToken', JSON.stringify(response.data.token), { expires: expirationTime });
+          Cookies.set('current_user_token', JSON.stringify(response.data.token), { expires: expirationTime });
           setShowModal(false);
           setVerificationCode('');
           setPhoneNumber('');
