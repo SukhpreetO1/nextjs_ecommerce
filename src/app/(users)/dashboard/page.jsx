@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UserDashboard = () => {
+const USER_DASHBOARD = () => {
   return (
     <>
       UserDashboard
@@ -8,4 +8,4 @@ const UserDashboard = () => {
   )
 }
 
-export default UserDashboard
+export default USER_DASHBOARD

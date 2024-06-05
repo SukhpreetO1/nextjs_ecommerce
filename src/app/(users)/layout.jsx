@@ -4,7 +4,6 @@ const HOMEPAGE = ({children}) => {
   return (
     <>
       <div className="container mx-auto">
-        <Navbar />
         {children}
       </div>
     </>
