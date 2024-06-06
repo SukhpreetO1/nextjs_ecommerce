@@ -10,7 +10,7 @@ export function middleware(request) {
   const admin_token = request.cookies.get('current_admin_token');
 
   if (!(token || admin_token) && !(isPublicPath || path === HOME_URL)) {
-    return NextResponse.redirect(new URL(LOGIN_URL, request.url));
+    return NextResponse.redirect(new URL(HOME_URL, request.url));
   }
 
   if (token && isPublicPath) {
