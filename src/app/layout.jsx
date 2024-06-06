@@ -1,6 +1,6 @@
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "@/app/api/routes/route";
+import { Navbar, ToastContainer } from "@/app/api/routes/route";
 
 export const metadata = {
   title: "Ecommerce",
@@ -13,6 +13,7 @@ export default function RootLayout({ children }) {
       <body>
         <main>
           <div className="container mx-auto">
+            <Navbar />
             {children}
             <ToastContainer position="top-right" />
           </div>
