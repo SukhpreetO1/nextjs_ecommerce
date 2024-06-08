@@ -38,7 +38,6 @@ const Login = () => {
       }
       catch (err) {
         setDisabled(false);
-        console.log(err);
         toast.error("Invalid credential");
       }
     } else {
