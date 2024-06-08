@@ -10,7 +10,7 @@ export const GOOGLE_LOGO = "https://firebasestorage.googleapis.com/v0/b/nextjs-e
 export const PHONE_NUMBER_LOGO = "https://firebasestorage.googleapis.com/v0/b/nextjs-ecommerce-100b3.appspot.com/o/public_images%2Fphone_number.jpg?alt=media&token=093bf0b0-f678-4b31-9844-9996c2fd7fe7https://firebasestorage.googleapis.com/v0/b/nextjs-ecommerce-100b3.appspot.com/o/public_images%2Fphone_number.jpg?alt=media&token=093bf0b0-f678-4b31-9844-9996c2fd7fe7";
 
 // getting routes for the users side 
-import USER_DASHBOARD from "@/app/(users)/dashboard/page";
+import USER_DASHBOARD from "@/app/(users)/(dashboard)/page";
 export { USER_DASHBOARD };
 
 // getting routes for footer section
