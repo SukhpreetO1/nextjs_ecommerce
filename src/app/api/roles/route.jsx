@@ -4,16 +4,28 @@ connect();
 
 export async function POST() {
     try {
-        const name = "User";
-        const role_name = await Roles.findOne({ name });
-        if (!role_name) {
-            const roleData = new Roles({ name });
-            const role_data = await roleData.save();
-            return NextResponse.json({ _id: role_data._id });
-        } else {
-            return NextResponse.json({ _id: role_name._id });
+        const adminRole = await Roles.findOne({ name: "Admin" });
+        if (!adminRole) {
+            const adminRoleData = new Roles({ name: "Admin" });
+            const adminRoleDataSaved = await adminRoleData.save();
+            console.log(adminRoleDataSaved);
         }
+        
+        const superAdminRole = await Roles.findOne({ name: "Super Admin" });
+        if (!superAdminRole) {
+            const superAdminRoleData = new Roles({ name: "Super Admin" });
+            const superAdminRoleDataSaved = await superAdminRoleData.save();
+            console.log(superAdminRoleDataSaved);
+        }
+
+        const userRole = await Roles.findOne({ name: "User" });
+        if (!userRole) {
+            const userRoleData = new Roles({ name: "User" });
+            const userRoleDataSaved = await userRoleData.save();
+            console.log(userRoleDataSaved);
+        }
+        return NextResponse.json({ _id: userRole._id });
     } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 })
+        return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

@@ -109,7 +109,7 @@ const Signup = () => {
 
                     <div className="password_confirm_password flex">
                         <PasswordField label_heading="Password" id="password" className="password" name="password" placeholder="Password" div_name="signup_password" value={formData.password} onChange={handleInputChange} error={errors.password} />
-                        <PasswordField label_heading="Confirm Password" id="confirm_password" className={`confirm_password ${formData.password === formData.confirm_password ? 'matched_passwords' : 'not_matched_passwords'}`} name="confirm_password" placeholder="Confirm Password" div_name="signup_confirm_password" value={formData.confirm_password} onChange={handleInputChange} error={errors.confirm_password} />
+                        <PasswordField label_heading="Confirm Password" id="confirm_password" className={`confirm_password ${formData.confirm_password === "" ? '' : formData.password === formData.confirm_password ? 'matched_passwords' : 'not_matched_passwords'}`} name="confirm_password" placeholder="Confirm Password" div_name="signup_confirm_password" value={formData.confirm_password} onChange={handleInputChange} error={errors.confirm_password} />
                     </div>
 
                     <div className="submit_button">
