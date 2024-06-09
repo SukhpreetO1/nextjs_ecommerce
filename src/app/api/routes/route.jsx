@@ -99,7 +99,7 @@ import {
   faUser
 } from "@fortawesome/free-regular-svg-icons";
 
-import { faShoppingBag } from "@fortawesome/free-solid-svg-icons"
+import { faShoppingBag, faFileCsv } from "@fortawesome/free-solid-svg-icons"
 
 // used to store data in cookies
 import Cookies from "js-cookie";
@@ -218,6 +218,7 @@ export {
   faUser,
 
   faShoppingBag,
+  faFileCsv,
 
   Cookies,
 

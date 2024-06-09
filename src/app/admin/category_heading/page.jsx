@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react'
-import { FontAwesomeIcon, Link, faPenToSquare, faTrashCan, faPlusSquare, ADMIN_ADD_CATEGORY_HEADING, ADMIN_EDIT_CATEGORY_HEADING, toast, axios, ADMIN_DASHBOARD } from "@/app/api/routes/route";
-import { MONGODB_CATEGORY_HEADING } from '@/app/api/mongodb_api/route';
+import { FontAwesomeIcon, Link, faPenToSquare, faTrashCan, faPlusSquare, ADMIN_ADD_CATEGORY_HEADING, ADMIN_EDIT_CATEGORY_HEADING, toast, axios, ADMIN_DASHBOARD, MONGODB_CATEGORY_HEADING, faFileCsv } from "@/app/api/routes/route";
 
 const CategoryHeading = () => {
   const [categoryHeading, setCategoryheading] = useState([]);
@@ -94,7 +93,8 @@ const CategoryHeading = () => {
               </div>
             </div>
 
-            <div className="add_category_heading_option text-end sm:mr-16 mr-4 mb-4 sm:w-0 w-full">
+            <div className="add_category_heading_option text-end sm:mr-32 mr-4 mb-4 sm:w-0 w-full flex">
+              <Link href="#" className='mr-6'><FontAwesomeIcon icon={faFileCsv} className='text-4xl plus_icon hover:text-blue-700' /></Link>
               <Link href={ADMIN_ADD_CATEGORY_HEADING}><FontAwesomeIcon icon={faPlusSquare} className='text-4xl plus_icon hover:text-blue-700' /></Link>
             </div>
           </div>
