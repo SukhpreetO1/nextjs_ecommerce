@@ -9,13 +9,14 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const cookie = cookies().get("current_user_token");
+  const admin_cookie = cookies().get("current_admin_token");
+  const super_cookie = cookies().get("current_super_admin_token");
   return (
     <html lang="en">
       <body>
         <main>
           <div className="container mx-auto">
-            {cookie && <Navbar />}
+            {!(admin_cookie || super_cookie) ? <Navbar /> : ''}
             {children}
             <ToastContainer position="top-right" />
           </div>
