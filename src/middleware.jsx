@@ -2,6 +2,14 @@ import { NextResponse } from 'next/server';
 import { FORGOT_PASSWORD, LOGIN_URL, SIGNUP_URL, USER_DASHBOARD, HOME_URL, ADMIN_DASHBOARD } from '@/app/api/routes/route';
 
 export function middleware(request) {
+  try {
+    if (!request.nextUrl) {
+      return NextResponse.redirect(new URL(HOME_URL, request.url));
+      }
+  } catch (error) {
+    console.error('Error in middleware:', error);
+    return NextResponse.error(error);
+  }
   const path = request.nextUrl.pathname;
 
   const isPublicPath = path === LOGIN_URL || path === SIGNUP_URL || path === FORGOT_PASSWORD;
