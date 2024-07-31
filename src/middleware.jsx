@@ -2,22 +2,13 @@ import { NextResponse } from 'next/server';
 import { FORGOT_PASSWORD, LOGIN_URL, SIGNUP_URL, USER_DASHBOARD, HOME_URL, ADMIN_DASHBOARD } from '@/app/api/routes/route';
 
 export function middleware(request) {
-  try {
-    if (!request.nextUrl) {
-      console.log('test');
-      return NextResponse.redirect(new URL(HOME_URL, request.url));
-    }
-  } catch (error) {
-    console.error('Error in middleware:', error);
-    return NextResponse.error(error);
-  }
   const path = request.nextUrl.pathname;
 
   const isPublicPath = path === LOGIN_URL || path === SIGNUP_URL || path === FORGOT_PASSWORD;
 
-  const token = request.cookies.get('current_user_token');
-  const admin_token = request.cookies.get('current_admin_token');
-  const super_admin_token = request.cookies.get('current_super_admin_token');
+  const token = request.cookies?.get('current_user_token');
+  const admin_token = request.cookies?.get('current_admin_token');
+  const super_admin_token = request.cookies?.get('current_super_admin_token');
 
   if (!(token || admin_token || super_admin_token) && !(isPublicPath || path === HOME_URL)) {
     return NextResponse.redirect(new URL(HOME_URL, request.url));
