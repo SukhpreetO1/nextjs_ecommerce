@@ -1,6 +1,17 @@
-import React from 'react'
+"use client";
+import { FontAwesomeIcon, Link, faPenToSquare, faTrashCan, MONGODB_USERS_DETAILS } from "@/app/api/routes/route";
+import React, { useEffect, useState } from 'react'
 
 const User_details = () => {
+    const [usersDetails, setUsersDetails] = useState();
+    useEffect(() => {
+        const fetchUsers = async () => {
+            const response = await fetch(MONGODB_USERS_DETAILS);
+            const userData = await response.json();
+            setUsersDetails(userData.data);
+        }
+        fetchUsers();
+    }, [])
     return (
         <>
             <div className='user_details_page sm:ml-60'>
@@ -8,38 +19,48 @@ const User_details = () => {
                     <h1 className='text-5xl font-bold leading-loose text-center py-3'>User Details</h1>
                 </div>
                 <div className="user_details_data">
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-4 border-4">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-600">
-                            <thead class="text-gray-600 uppercase border-b-2">
+                    <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-4 border-4">
+                        <table className="w-full text-sm text-left rtl:text-right text-gray-600">
+                            <thead className="text-gray-600 uppercase border-b-2">
                                 <tr>
-                                    <th class="px-6 py-4">First Name</th>
-                                    <th class="px-6 py-4">Last Name</th>
-                                    <th class="px-6 py-4">Email</th>
-                                    <th class="px-6 py-4">Username</th>
-                                    <th class="px-6 py-4">Role</th>
-                                    <th class="px-6 py-4">Date of Birth</th>
-                                    <th class="px-6 py-4">Mobile Number</th>
-                                    <th class="px-6 py-4">Gender</th>
-                                    <th class="px-6 py-4">Hobbies</th>
-                                    <th class="px-6 py-4">Action</th>
+                                    <th className="px-6 py-4 whitespace-pre">First Name</th>
+                                    <th className="px-6 py-4 whitespace-pre">Last Name</th>
+                                    <th className="px-6 py-4 whitespace-pre">Email</th>
+                                    <th className="px-6 py-4 whitespace-pre">Username</th>
+                                    <th className="px-6 py-4 whitespace-pre">Role</th>
+                                    <th className="px-6 py-4 whitespace-pre">Date of Birth</th>
+                                    <th className="px-6 py-4 whitespace-pre">Mobile Number</th>
+                                    <th className="px-6 py-4 whitespace-pre">Gender</th>
+                                    <th className="px-6 py-4 whitespace-pre">Hobbies</th>
+                                    <th className="px-6 py-4 whitespace-pre">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="text-gray-600">
-                                    <td class="px-6 py-4">Sukhpreet</td>
-                                    <td class="px-6 py-4">Singh</td>
-                                    <td class="px-6 py-4">ssingh77022@gmail.com</td>
-                                    <td class="px-6 py-4">Sukhpreet001</td>
-                                    <td class="px-6 py-4">Admin</td>
-                                    <td class="px-6 py-4">1999-09-06</td>
-                                    <td class="px-6 py-4">+91 6239910788</td>
-                                    <td class="px-6 py-4">Malw</td>
-                                    <td class="px-6 py-4">Football, Painting, Musix</td>
-                                    <td class="flex items-center px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                        <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline ms-3">Remove</a>
-                                    </td>
-                                </tr>
+                                {usersDetails && usersDetails.length > 0 ? (
+                                    usersDetails?.map((user, index) => (
+                                        <tr key={user?.id || index} className="text-gray-600">
+                                            <td className="px-6 py-4 whitespace-pre">{user?.first_name || "-"}</td>
+                                            <td className="px-6 py-4 whitespace-pre">{user?.last_name || "-"}</td>
+                                            <td className="px-6 py-4 whitespace-pre">{user?.email || "-"}</td>
+                                            <td className={`px-6 py-4 whitespace-pre ${!user?.username ? 'text-center' : ''}`}>{user?.username || "-"}</td>
+                                            <td className={`px-6 py-4 whitespace-pre ${!user?.role_id.name ? 'text-center' : ''}`}>{user?.role_id.name || "-"}</td>
+                                            <td className={`px-6 py-4 whitespace-pre ${!user?.date_of_birth ? 'text-center' : ''}`}>
+                                                {user?.date_of_birth ? new Date(user.date_of_birth).toISOString().slice(0, 10) : "-"}
+                                            </td>
+                                            <td className={`px-6 py-4 whitespace-pre ${!user?.mobile_number ? 'text-center' : ''}`}>{user?.mobile_number || "-"}</td>
+                                            <td className={`px-6 py-4 whitespace-pre ${!user?.gender ? 'text-center' : ''}`}>{user?.gender || "-"}</td>
+                                            <td className={`px-6 py-4 whitespace-pre ${!user?.hobbies ? 'text-center' : ''}`}>{user?.hobbies ? user.hobbies.join(', ') : "-"}</td>
+                                            <td className="flex items-center px-6 py-4">
+                                                <Link href="#" className="text-blue-700 mr-2 user_edit_option"><FontAwesomeIcon icon={faPenToSquare} /></Link>
+                                                <Link href="#" className="text-red-600 mr-2 user_delete_option"><FontAwesomeIcon icon={faTrashCan} /></Link>
+                                            </td>
+                                        </tr>
+                                    ))
+                                ) : (
+                                    <tr>
+                                        <td colSpan="10" className="px-6 py-4 text-center text-gray-600">No data found</td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>

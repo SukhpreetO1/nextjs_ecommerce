@@ -54,8 +54,8 @@ export const validate_signup_submit_form = (data) => {
 
     if (!data.password.trim()) {
         errors.password = 'Password is required';
-    } else if(!/^(?=.*\d)(?=.*[a-z]|[A-Z]).{6,20}$/.test(data.password)) {
-        errors.password = 'Invalid password format. Must contain at least 6 characters, 1 capital letter and 1 number.';
+    // } else if(!/^(?=.*\d)(?=.*[a-z]|[A-Z]).{6,20}$/.test(data.password)) {
+    //     errors.password = 'Invalid password format. Must contain at least 6 characters, 1 capital letter and 1 number.';
     }
 
     if (!data.confirm_password.trim()) {

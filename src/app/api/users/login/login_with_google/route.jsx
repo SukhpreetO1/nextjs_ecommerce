@@ -1,5 +1,4 @@
 import { User, NextResponse, jwt, connect } from "@/app/api/routes/route";
-
 connect();
 
 export async function POST(request) {
@@ -23,7 +22,7 @@ export async function POST(request) {
             email: email
         }
 
-        const token = await jwt.sign(tokenData, process.env.NEXT_PUBLIC_TOKEN_SECRET, {expiresIn: "30min"})
+        const token = await jwt.sign(tokenData, process.env.NEXT_PUBLIC_TOKEN_SECRET, {expiresIn: process.env.NEXT_PUBLIC_EXPIRATION_TIME})
 
         const [first_name, last_name] = fullname.split(' ');
         const newUser = new User({

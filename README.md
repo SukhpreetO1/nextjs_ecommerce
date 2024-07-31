@@ -34,6 +34,9 @@ To use the font awesome,
     npm i --save @fortawesome/react-fontawesome
     npm i --save @fortawesome/react-fontawesome@latest
 
+    npm install @fortawesome/free-solid-svg-icons
+
+
 To store data in cookies
     npm install js-cookie
 
@@ -57,3 +60,15 @@ To send the mail
 To connect the front end with database
     npm install mongoose
     npm install aws4
+
+
+To Kill the terminal in windows 
+    netstat -ano | findstr :3000
+
+    taskkill /PID <PID> /F
+
+To add the checklist of the password
+    npm install react-password-checklist
+
+To optimising the images
+    npm i sharp

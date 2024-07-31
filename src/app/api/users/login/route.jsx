@@ -24,6 +24,7 @@ export async function POST(request) {
 
         const tokenData = {
             id: user._id,
+            name:user.first_name != '' ? user.first_name : '',
             email: user.email,
             role_name: role.name
         }
@@ -31,14 +32,18 @@ export async function POST(request) {
         const token = await jwt.sign(tokenData, process.env.NEXT_PUBLIC_TOKEN_SECRET, {expiresIn: "30min"})
 
         let redirectUrl;
+        let token_name;
         if(tokenData.role_name === "Super Admin"){
             redirectUrl = ADMIN_DASHBOARD;
+            token_name = "current_super_admin_token"
         } else if (tokenData.role_name === "Admin") {
             redirectUrl = ADMIN_DASHBOARD;
-        } else if (tokenData.role_name === "Users") {
+            token_name = "current_admin_token"
+        } else if (tokenData.role_name === "User") {
             redirectUrl = USER_DASHBOARD;
+            token_name = "current_user_token"
         }
-        return NextResponse.json({ token, redirectUrl });
+        return NextResponse.json({ token, redirectUrl, token_name });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 })
     }

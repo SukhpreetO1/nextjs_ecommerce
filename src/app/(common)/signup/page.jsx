@@ -1,19 +1,19 @@
 "use client";
-import { InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, useRouter, auth, createUserWithEmailAndPassword, onAuthStateChanged, getAuth, axios, MONGODB_API_SIGNUP } from '@/app/api/routes/route';
+import { InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, useRouter, auth, createUserWithEmailAndPassword, onAuthStateChanged, getAuth, axios, MONGODB_API_SIGNUP, MONGODB_ROLE_DATA } from '@/app/api/routes/route';
 import React, { useState } from 'react';
 
 const genderOptions = [
-    { label: 'Male', value: '1' },
-    { label: 'Female', value: '2' },
-    { label: 'Other', value: '3' },
+    { label: 'Male', value: 'Male' },
+    { label: 'Female', value: 'Female' },
+    { label: 'Other', value: 'Other' },
 ];
 
 const hobbiesOptions = [
-    { label: 'Football', value: '1', selected: false },
-    { label: 'Cricket', value: '2', selected: false },
-    { label: 'Basketball', value: '3', selected: false },
-    { label: 'Tennis', value: '4', selected: false },
-    { label: 'Others', value: '5', selected: false },
+    { label: 'Football', value: 'Football', selected: false },
+    { label: 'Cricket', value: 'Cricket', selected: false },
+    { label: 'Basketball', value: 'Basketball', selected: false },
+    { label: 'Tennis', value: 'Tennis', selected: false },
+    { label: 'Others', value: 'Others', selected: false },
 ];
 
 const Signup = () => {
@@ -61,7 +61,9 @@ const Signup = () => {
         }
 
         try {
-            const response = await axios.post(MONGODB_API_SIGNUP, formData);
+            const role_response = await axios.post(MONGODB_ROLE_DATA, formData);
+            const role_id = role_response.data._id;
+            const response = await axios.post(MONGODB_API_SIGNUP, { ...formData, role_id });
             const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
             router.push(LOGIN_URL);
             toast.success(response.data.message);
@@ -107,7 +109,7 @@ const Signup = () => {
 
                     <div className="password_confirm_password flex">
                         <PasswordField label_heading="Password" id="password" className="password" name="password" placeholder="Password" div_name="signup_password" value={formData.password} onChange={handleInputChange} error={errors.password} />
-                        <PasswordField label_heading="Confirm Password" id="confirm_password" className="confirm_password" name="confirm_password" placeholder="Confirm Password" div_name="signup_confirm_password" value={formData.confirm_password} onChange={handleInputChange} error={errors.confirm_password} />
+                        <PasswordField label_heading="Confirm Password" id="confirm_password" className={`confirm_password ${formData.confirm_password === "" ? '' : formData.password === formData.confirm_password ? 'matched_passwords' : 'not_matched_passwords'}`} name="confirm_password" placeholder="Confirm Password" div_name="signup_confirm_password" value={formData.confirm_password} onChange={handleInputChange} error={errors.confirm_password} />
                     </div>
 
                     <div className="submit_button">
