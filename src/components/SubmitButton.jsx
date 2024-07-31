@@ -1,5 +1,3 @@
-import React from 'react'
-
 const SubmitButton = ({ name, id, className, div_name, label }) => {
   return (
     <div className="container mt-3">

@@ -1,7 +1,6 @@
 import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
-import { cookies } from 'next/headers'
-import { Navbar, ToastContainer } from "@/app/api/routes/route";
+import { Cookies, Navbar, ToastContainer } from "@/app/api/routes/route";
 
 export const metadata = {
   title: "Ecommerce",
@@ -9,8 +8,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const admin_cookie = cookies().get("current_admin_token");
-  const super_cookie = cookies().get("current_super_admin_token");
+  const admin_cookie = Cookies?.get("current_admin_token");
+  const super_cookie = Cookies?.get("current_super_admin_token");
   return (
     <html lang="en">
       <body>

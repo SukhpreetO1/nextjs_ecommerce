@@ -1,5 +1,3 @@
-import React from "react";
-
 const DateField = ({ label_heading, name, id, className, div_name, value, onChange, error }) => {
     return (
         <div className="container mb-3">
