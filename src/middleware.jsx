@@ -38,6 +38,7 @@ export const config = {
   unstable_allowDynamic: [
     '/lib/utilities.js',
     '/node_modules/mongoose/**',
+    '/node_modules/next/dist/**',
   ],
   matcher: [
     "/",
