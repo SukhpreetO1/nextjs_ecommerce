@@ -34,7 +34,7 @@ export function middleware(request) {
 }
 
 export const config = {
-  runtime: 'edge',
+  runtime: 'experimental-edge',
   unstable_allowDynamic: [
     '/lib/utilities.js',
     '/node_modules/mongoose/**',
