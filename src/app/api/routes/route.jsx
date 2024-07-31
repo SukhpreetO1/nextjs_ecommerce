@@ -9,6 +9,7 @@ import InputField from "@/components/InputField";
 import PasswordField from "@/components/PasswordField";
 import RadioButtonField from "@/components/RadioButtonField";
 import SubmitButton from "@/components/SubmitButton";
+import ClientCookieHandler from '@/components/ClientCookieHandler';
 
 // js validation files
 import { validate_signup_submit_form } from "@/utils/js/signup";
@@ -140,6 +141,7 @@ export {
   PasswordField,
   RadioButtonField,
   SubmitButton,
+  ClientCookieHandler,
 
   validate_signup_submit_form,
   validate_login_submit_form,
