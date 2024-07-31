@@ -40,6 +40,8 @@ import {
   ADMIN_EDIT_CATEGORIES
 } from "@/app/api/redirection_route/route";
 
+import DASHBOARD from "@/app/(users)/dashboard/page";
+
 import { 
   MONGODB_API_SIGNUP,
   MONGODB_API_LOGIN,
@@ -50,6 +52,8 @@ import {
   MONGODB_CATEGORY_TYPES,
   MONGODB_CATEGORIES,
   MONGODB_ROLE_DATA,
+  MONGODB_LOGGED_USER,
+  MONGODB_LOGOUT,
 } from "@/app/api/mongodb_api/route";
 
 import Navbar from "@/app/(users)/(navbar)/page";
@@ -95,7 +99,7 @@ import {
   faUser
 } from "@fortawesome/free-regular-svg-icons";
 
-import { faShoppingBag } from "@fortawesome/free-solid-svg-icons"
+import { faShoppingBag, faFileCsv } from "@fortawesome/free-solid-svg-icons"
 
 // used to store data in cookies
 import Cookies from "js-cookie";
@@ -163,6 +167,8 @@ export {
   ADMIN_ADD_CATEGORIES, 
   ADMIN_EDIT_CATEGORIES,
 
+  DASHBOARD,
+
   MONGODB_API_SIGNUP,
   MONGODB_API_LOGIN,
   MONGODB_API_LOGIN_WITH_GOOGLE,
@@ -172,6 +178,8 @@ export {
   MONGODB_CATEGORY_TYPES,
   MONGODB_CATEGORIES,
   MONGODB_ROLE_DATA,
+  MONGODB_LOGGED_USER,
+  MONGODB_LOGOUT,
 
   Navbar,
 
@@ -210,6 +218,7 @@ export {
   faUser,
 
   faShoppingBag,
+  faFileCsv,
 
   Cookies,
 

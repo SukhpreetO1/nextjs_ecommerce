@@ -8,9 +8,10 @@ export function middleware(request) {
 
   const token = request.cookies.get('current_user_token');
   const admin_token = request.cookies.get('current_admin_token');
+  const super_admin_token = request.cookies.get('current_super_admin_token');
 
-  if (!(token || admin_token) && !(isPublicPath || path === HOME_URL)) {
-    return NextResponse.redirect(new URL(LOGIN_URL, request.url));
+  if (!(token || admin_token || super_admin_token) && !(isPublicPath || path === HOME_URL)) {
+    return NextResponse.redirect(new URL(HOME_URL, request.url));
   }
 
   if (token && isPublicPath) {
@@ -24,6 +25,12 @@ export function middleware(request) {
   } else if (admin_token && path == HOME_URL) {
     return NextResponse.redirect(new URL(ADMIN_DASHBOARD, request.url));
   }
+
+  if (super_admin_token && isPublicPath) {
+    return NextResponse.redirect(new URL(ADMIN_DASHBOARD, request.url));
+  } else if (super_admin_token && path == HOME_URL) {
+    return NextResponse.redirect(new URL(ADMIN_DASHBOARD, request.url));
+  }
 }
 
 export const config = {
@@ -35,6 +42,7 @@ export const config = {
     "/dashboard",
 
     "/admin",
+    "/admin/dashboard",
     "/admin/user_details",
     "/admin/category_heading",
     "/admin/category_heading/add_category_heading",
