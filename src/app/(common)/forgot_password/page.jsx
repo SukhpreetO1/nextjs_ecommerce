@@ -15,25 +15,25 @@ const ForgotPassword = () => {
     e.preventDefault();
     const validation_errors = validate_forgot_password_submit_form(formData);
     if (Object.keys(validation_errors).length === 0) {
-      // try {
-      //   const usersRef = collection(db, 'users');
-      //   const q = query(usersRef, where('email', '==', formData.email));
-      //   const querySnapshot = await getDocs(q);
+      try {
+        const usersRef = collection(db, 'users');
+        const q = query(usersRef, where('email', '==', formData.email));
+        const querySnapshot = await getDocs(q);
 
-      //   if (!querySnapshot.empty) {
-      //     await sendPasswordResetEmail(auth, formData.email);;
-      //     if (formData.email !== null) {
-      //       localStorage.setItem("hasShownForgotPasswordToast", false);
-      //       router.push(LOGIN_URL);
-      //       return; 
-      //     }
-      //   }
-      //   throw new Error("Email not found. Please check it again");
-      // } catch (err) {
-      //   toast.error(err.message || "An error occurred. Please try again.", {
-      //     position: "top-right",
-      //   });
-      // }
+        if (!querySnapshot.empty) {
+          await sendPasswordResetEmail(auth, formData.email);;
+          if (formData.email !== null) {
+            localStorage.setItem("hasShownForgotPasswordToast", false);
+            router.push(LOGIN_URL);
+            return; 
+          }
+        }
+        throw new Error("Email not found. Please check it again");
+      } catch (err) {
+        toast.error(err.message || "An error occurred. Please try again.", {
+          position: "top-right",
+        });
+      }
     } else {
       setErrors(validation_errors);
     }

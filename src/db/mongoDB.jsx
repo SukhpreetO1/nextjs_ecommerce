@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
-export async function connect() {
+export function connect() {
     try {
         mongoose.connect(process.env.NEXT_PUBLIC_MONGO_URL);
-        const connect = mongoose.connection;
-        connect.on('connected', ()=>{
+        const database_connection = mongoose.connection;
+        database_connection.on('connected', ()=>{
             console.log("Connected to MongoDB");
         })
 
-        connect.on('error', (error) => {
+        database_connection.on('error', (error) => {
             console.log("Error connecting to MongoDB" + error);
             process.exit();
         })

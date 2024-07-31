@@ -4,7 +4,7 @@ connect();
 
 export async function GET(request) {
     try {
-        const tokenWithQuotes = request.cookies.get('current_user_token');
+        const tokenWithQuotes = await request.cookies.get('current_user_token');
         if (!tokenWithQuotes) {
             return NextResponse.json({ decodedToken: "" });
         }

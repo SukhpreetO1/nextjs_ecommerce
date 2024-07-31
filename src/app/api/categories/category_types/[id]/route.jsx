@@ -27,7 +27,6 @@ export async function PUT(req, {params}){
         const category_type = await Category_Types.findByIdAndUpdate(params.id, { status });
         return NextResponse.json({ category_type: category_type }); 
     } catch (error) {
-        console.log(error);
         return NextResponse.json({ error: error.message }, { status: 500 });
     }
 }

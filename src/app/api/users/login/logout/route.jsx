@@ -2,7 +2,7 @@ import { NextResponse, connect } from "@/app/api/routes/route";
 import { cookies } from 'next/headers'
 connect();
 
-export async function GET() {
+export function GET() {
     try {
         cookies().delete('current_user_token')
         cookies().delete('current_admin_token')

@@ -1,4 +1,4 @@
-import { NextResponse, connect, User, Terms_and_conditions } from "@/app/api/routes/route";
+import { NextResponse, connect, Terms_and_conditions } from "@/app/api/routes/route";
 
 connect();
 
