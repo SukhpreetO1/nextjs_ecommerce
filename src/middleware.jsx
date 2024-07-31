@@ -49,6 +49,6 @@ export const config = {
     "/forgot_password",
     "/dashboard",
     "/admin",
-    "/admin/**",
+    "/admin/:path",
   ],
 }
