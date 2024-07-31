@@ -34,6 +34,11 @@ export function middleware(request) {
 }
 
 export const config = {
+  runtime: 'experimental-edge',
+  unstable_allowDynamic: [
+    '/lib/utilities.js',
+    '/node_modules/**',
+  ],
   matcher: [
     "/",
     "/login",
