@@ -37,7 +37,7 @@ export const config = {
   runtime: 'experimental-edge',
   unstable_allowDynamic: [
     '/lib/utilities.js',
-    '/node_modules/**',
+    '/node_modules/mongoose/**',
   ],
   matcher: [
     "/",
