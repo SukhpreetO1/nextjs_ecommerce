@@ -3,10 +3,10 @@ import { FORGOT_PASSWORD, LOGIN_URL, SIGNUP_URL, USER_DASHBOARD, HOME_URL, ADMIN
 
 export function middleware(request) {
   try {
-    console.log(request.nextUrl);
     if (!request.nextUrl) {
+      console.log('test');
       return NextResponse.redirect(new URL(HOME_URL, request.url));
-      }
+    }
   } catch (error) {
     console.error('Error in middleware:', error);
     return NextResponse.error(error);
