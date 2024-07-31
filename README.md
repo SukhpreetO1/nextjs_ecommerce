@@ -69,3 +69,6 @@ To Kill the terminal in windows
 
 To add the checklist of the password
     npm install react-password-checklist
+
+To optimising the images
+    npm i sharp

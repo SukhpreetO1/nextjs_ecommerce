@@ -1,8 +1,21 @@
 const nextConfig = {
+  productionBrowserSourceMaps: true,
   reactStrictMode: false,
   images: {
-    domains: ['picsum.photos'],
-    domains: ['firebasestorage.googleapis.com']
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'firebasestorage.googleapis.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 
