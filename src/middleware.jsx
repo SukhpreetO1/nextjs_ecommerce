@@ -3,6 +3,7 @@ import { FORGOT_PASSWORD, LOGIN_URL, SIGNUP_URL, USER_DASHBOARD, HOME_URL, ADMIN
 
 export function middleware(request) {
   try {
+    console.log(request.nextUrl);
     if (!request.nextUrl) {
       return NextResponse.redirect(new URL(HOME_URL, request.url));
       }
