@@ -1,4 +1,5 @@
 const nextConfig = {
+  compress: true,
   productionBrowserSourceMaps: true,
   reactStrictMode: false,
   images: {
