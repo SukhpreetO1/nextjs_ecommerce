@@ -34,6 +34,10 @@ export function middleware(request) {
 }
 
 export const config = {
+  unstable_allowDynamic: [
+    '/lib/utilities.js',
+    '/node_modules/function-bind/**',
+  ],
   matcher: [
     "/",
     "/login",
