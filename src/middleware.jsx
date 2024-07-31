@@ -38,12 +38,12 @@ export const config = {
     '/lib/utilities.js',
     '/node_modules/mongoose/**',
   ],
-  matcher: [
-    "/login",
-    "/signup",
-    "/forgot_password",
-    "/dashboard",
-    "/admin",
-    "/admin/:path*",
-  ],
+  // matcher: [
+  //   "/login",
+  //   "/signup",
+  //   "/forgot_password",
+  //   "/dashboard",
+  //   "/admin",
+  //   "/admin/:path*",
+  // ],
 }
