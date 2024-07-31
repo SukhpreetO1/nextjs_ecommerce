@@ -32,18 +32,18 @@ export function middleware(request) {
   return NextResponse.next();
 }
 
-export const config = {
-  runtime: 'experimental-edge',
-  unstable_allowDynamic: [
-    '/lib/utilities.js',
-    '/node_modules/mongoose/**',
-  ],
-  // matcher: [
-  //   "/login",
-  //   "/signup",
-  //   "/forgot_password",
-  //   "/dashboard",
-  //   "/admin",
-  //   "/admin/:path*",
-  // ],
-}
+// export const config = {
+//   runtime: 'experimental-edge',
+//   unstable_allowDynamic: [
+//     '/lib/utilities.js',
+//     '/node_modules/mongoose/**',
+//   ],
+//   matcher: [
+//     "/login",
+//     "/signup",
+//     "/forgot_password",
+//     "/dashboard",
+//     "/admin",
+//     "/admin/:path*",
+//   ],
+// }
