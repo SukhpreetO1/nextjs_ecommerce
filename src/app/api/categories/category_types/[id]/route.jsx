@@ -13,7 +13,7 @@ export async function DELETE(req, {params}) {
 export async function GET(req, {params}){
     try {
         const category_type = await Category_Types.findById(params.id);
-        const categoryHeader = await Category_Heading.findById(category_type.category_heading_id);
+        // const categoryHeader = await Category_Heading.findById(category_type.category_heading_id);
         return NextResponse.json({ category_type });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500 })

@@ -16,6 +16,6 @@ const termsAndConditionsSchema = new mongoose.Schema({
     }
 });
 
-const Terms_and_conditions = mongoose.models && mongoose.models.terms_and_conditions ? mongoose.models.terms_and_conditions : mongoose.model("terms_and_conditions", termsAndConditionsSchema);
+const Terms_and_conditions = mongoose.models?.terms_and_conditions || mongoose.model("terms_and_conditions", termsAndConditionsSchema);
 
 export default Terms_and_conditions;

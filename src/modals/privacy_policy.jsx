@@ -16,6 +16,6 @@ const privacyPolicySchema = new mongoose.Schema({
     }
 });
 
-const Privacy_Policy = mongoose.models && mongoose.models.privacy_policy ? mongoose.models.privacy_policy : mongoose.model("privacy_policy", privacyPolicySchema);
+const Privacy_Policy = mongoose.models?.privacy_policy || mongoose.model("privacy_policy", privacyPolicySchema);
 
 export default Privacy_Policy;

@@ -1,4 +1,4 @@
-import { HOME_URL, Link, Navbar } from "@/app/api/routes/route";
+import { HOME_URL, Link } from "@/app/api/routes/route";
 
 export default function NotFound() {
   return (

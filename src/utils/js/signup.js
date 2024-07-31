@@ -48,7 +48,7 @@ export const validate_signup_submit_form = (data) => {
 
     if (!data.hobbies) {
         errors.hobbies = 'Hobby field is required.';  
-    } else if (data.hobbies == '') {
+    } else if (data.hobbies === '') {
         errors.hobbies = 'Please select atleast 1 hobby.';
     }
 
@@ -60,7 +60,7 @@ export const validate_signup_submit_form = (data) => {
 
     if (!data.confirm_password.trim()) {
         errors.confirm_password = 'Confirm password is required';
-    } else if (data.confirm_password != data.password) {
+    } else if (data.confirm_password !== data.password) {
         errors.confirm_password = 'Confirm password does not match.';
     }
 

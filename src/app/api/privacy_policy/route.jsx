@@ -2,7 +2,7 @@ import { NextResponse, connect, User, Privacy_Policy } from "@/app/api/routes/ro
 
 connect();
 
-export async function GET(request) {
+export async function GET() {
     try {
         const privacy_policy = await Privacy_Policy.findOne({});
         return NextResponse.json({ privacy_policy });

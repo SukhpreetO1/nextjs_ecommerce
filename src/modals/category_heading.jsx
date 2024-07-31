@@ -20,6 +20,6 @@ const categoryHeadingSchema = new mongoose.Schema({
     }
 });
 
-const Category_Heading = mongoose.models && mongoose.models.category_heading ? mongoose.models.category_heading : mongoose.model("category_heading", categoryHeadingSchema);
+const Category_Heading = mongoose.models?.category_heading || mongoose.model("category_heading", categoryHeadingSchema);
 
 export default Category_Heading;

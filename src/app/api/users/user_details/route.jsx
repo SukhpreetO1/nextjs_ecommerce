@@ -2,7 +2,7 @@ import { NextResponse, connect, User } from "@/app/api/routes/route";
 
 connect();
 
-export async function GET(request) {
+export async function GET() {
     try {
         const data = await User.aggregate([
             {

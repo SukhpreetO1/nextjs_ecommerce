@@ -16,19 +16,19 @@ export function middleware(request) {
 
   if (token && isPublicPath) {
     return NextResponse.redirect(new URL(USER_DASHBOARD, request.url));
-  } else if (token && path == HOME_URL) {
+  } else if (token && path === HOME_URL) {
     return NextResponse.redirect(new URL(USER_DASHBOARD, request.url));
   }
 
   if (admin_token && isPublicPath) {
     return NextResponse.redirect(new URL(ADMIN_DASHBOARD, request.url));
-  } else if (admin_token && path == HOME_URL) {
+  } else if (admin_token && path === HOME_URL) {
     return NextResponse.redirect(new URL(ADMIN_DASHBOARD, request.url));
   }
 
   if (super_admin_token && isPublicPath) {
     return NextResponse.redirect(new URL(ADMIN_DASHBOARD, request.url));
-  } else if (super_admin_token && path == HOME_URL) {
+  } else if (super_admin_token && path === HOME_URL) {
     return NextResponse.redirect(new URL(ADMIN_DASHBOARD, request.url));
   }
 }

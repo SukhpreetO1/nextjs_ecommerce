@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const RadioButtonField = ({ label_heading, div_name, options, onSelect, className, error, setError }) => {
+const RadioButtonField = ({ label_heading, div_name, options, onSelect, className, error }) => {
     const [gender, setGender] = useState(null);
 
     const handleOptionChange = (event) => {

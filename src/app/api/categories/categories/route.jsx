@@ -1,7 +1,7 @@
 import { NextResponse, connect, Categories } from "@/app/api/routes/route";
 connect();
 
-export async function GET(request) {
+export async function GET() {
     try {
         const categories = await Categories.findOne({});
         return NextResponse.json({ categories });

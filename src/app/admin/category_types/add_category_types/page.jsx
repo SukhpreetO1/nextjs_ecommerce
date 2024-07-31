@@ -34,7 +34,7 @@ const AddCategorytypes = () => {
                 router.push(ADMIN_CATEGORY_TYPES);
                 toast.success("Category Types Added Successfully");
             } catch (error) {
-                if (error.response.data.error && error.response.data.error.includes('duplicate key error collection')) {
+                if (error.response?.data?.error?.includes('duplicate key error collection')) {
                     toast.error("Name already exits. Please choose a different name.");
                 }
             }
@@ -91,7 +91,7 @@ const AddCategorytypes = () => {
                                     <fieldset>
                                         <h1 className='block text-sm font-medium leading-6 text-gray-900 mb-2'>Choose Category Header <span className='important_mark text-red-500'>*</span></h1>
                                         <div className="relative border border-gray-300 text-gray-800 shadow-lg rounded-sm">
-                                            <label htmlFor="category_heading_id"></label>
+                                            <label htmlFor="category_heading_id" />
                                             <select className="category_heading_id appearance-none w-full py-1 px-2 rounded-sm" name="category_heading_id" id="category_heading_id" value={formData.category_heading_id} onChange={handleInputChange} >
                                                 <option value="" disabled>Please select one category heading...</option>
                                                 {categoryHeaders.map((category_header, index) => (

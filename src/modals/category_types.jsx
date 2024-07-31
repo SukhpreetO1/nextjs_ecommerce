@@ -24,6 +24,6 @@ const categoryTypesSchema = new mongoose.Schema({
     }
 });
 
-const Category_Types = mongoose.models && mongoose.models.category_types ? mongoose.models.category_types : mongoose.model("category_types", categoryTypesSchema);
+const Category_Types = mongoose.models?.category_types || mongoose.model("category_types", categoryTypesSchema);
 
 export default Category_Types;

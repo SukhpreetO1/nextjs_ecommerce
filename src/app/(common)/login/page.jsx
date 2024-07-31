@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { InputField, PasswordField, SubmitButton, validate_login_submit_form, SIGNUP_URL, Link, auth, signInWithEmailAndPassword, useRouter, toast, Cookies, FORGOT_PASSWORD, GOOGLE_LOGO, PHONE_NUMBER_LOGO, Image, signInWithPopup, GoogleAuthProvider, axios, signInWithPhoneNumber, RecaptchaVerifier, PhoneAuthProvider, USER_DASHBOARD, MONGODB_API_LOGIN, MONGODB_API_LOGIN_WITH_GOOGLE, MONGODB_API_LOGIN_WITH_PHONE_NUMBER } from '@/app/api/routes/route';
 
 const Login = () => {
@@ -164,14 +164,14 @@ const Login = () => {
             <div className="other_autherization_method flex justify-center mt-4">
               <div><span className='flex justify-center font-light italic text-gray-500'>- - - - - - - - - Other ways - - - - - - - - -</span>
                 <div className='my-4'>
-                  <div className="google_autherization cursor-pointer flex my-4" onClick={() => signInWithGoogle()}>
+                  <button className="google_autherization cursor-pointer flex my-4" onClick={() => signInWithGoogle()}>
                     <Image src={GOOGLE_LOGO} width={50} height={50} alt="google_logo" className='w-8 h-8 me-3 rounded-lg' />
                     <span className='font-light text-gray-500'>Log in with google account</span>
-                  </div>
-                  <div className="phone_number_autherization cursor-pointer flex" onClick={() => setShowModal(true)}>
+                  </button>
+                  <button className="phone_number_autherization cursor-pointer flex" onClick={() => setShowModal(true)}>
                     <Image src={PHONE_NUMBER_LOGO} width={50} height={50} alt="google_logo" className='w-8 h-8 me-3 rounded-lg' />
                     <span className='font-light text-gray-500'>Log in with phone number</span>
-                  </div>
+                  </button>
                   {showModal && (
                     <div id="default-modal" tabIndex="-1" aria-hidden="true" className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-80">
                       <div className="relative p-4 w-full max-w-2xl max-h-full sign_in_with_mobile_number">

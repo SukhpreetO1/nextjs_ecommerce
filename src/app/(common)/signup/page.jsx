@@ -1,5 +1,5 @@
 "use client";
-import { InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, useRouter, auth, createUserWithEmailAndPassword, onAuthStateChanged, getAuth, axios, MONGODB_API_SIGNUP, MONGODB_ROLE_DATA } from '@/app/api/routes/route';
+import { InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, useRouter, auth, createUserWithEmailAndPassword, axios, MONGODB_API_SIGNUP, MONGODB_ROLE_DATA } from '@/app/api/routes/route';
 import React, { useState } from 'react';
 
 const genderOptions = [

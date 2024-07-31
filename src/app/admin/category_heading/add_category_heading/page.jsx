@@ -24,7 +24,7 @@ const AddCategoryheading = () => {
                 router.push(ADMIN_CATEGORY_HEADING);
                 toast.success("Category Header Added Successfully");
             } catch (error) {
-                if (error.response.data.error && error.response.data.error.includes('duplicate key error collection')) {
+                if (error.response?.data?.error?.includes('duplicate key error collection')) {
                     toast.error("Name already exits. Please choose a different name.");
                 }
             }

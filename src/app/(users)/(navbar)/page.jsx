@@ -65,7 +65,7 @@ const Navbar = () => {
               <div className='hidden w-full md:block md:w-auto mt-1'>
                 <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-white md:dark:bg-white dark:border-gray-700">
                   {currentPath === LOGIN_URL || currentPath === FORGOT_PASSWORD || currentPath === SIGNUP_URL ? '' :
-                    <li className={`profile_dropdown relative ${isDropdownOpen == true ? 'border-b-4 border-b-red-500 h-12 -mb-4 w-10' : ''}`} onMouseEnter={() => setIsDropdownOpen(true)} onMouseLeave={() => setIsDropdownOpen(false)}><div className="py-2 px-3 text-black rounded hover:bg-white md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-white hover:cursor-pointer dark:hover:text-white grid gap-1 justify-items-center" ><FontAwesomeIcon icon={faUser} /><span className='text-xs'>Profile</span></div>
+                    <li className={`profile_dropdown relative ${isDropdownOpen === true ? 'border-b-4 border-b-red-500 h-12 -mb-4 w-10' : ''}`} onMouseEnter={() => setIsDropdownOpen(true)} onMouseLeave={() => setIsDropdownOpen(false)}><div className="py-2 px-3 text-black rounded hover:bg-white md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-white hover:cursor-pointer dark:hover:text-white grid gap-1 justify-items-center" ><FontAwesomeIcon icon={faUser} /><span className='text-xs'>Profile</span></div>
                       {isDropdownOpen && (
                         <div className="absolute w-72 -right-28 top-12 border-2 border-solid border-gray-100 p-3 bg-gray-50 rounded shadow-md">
                           <div className='p-3'>
@@ -112,7 +112,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="items-center justify-between hidden md:flex md:order-1 lg:w-1/3 w-3/5" id="categories_data">
-            {categoryHeader && categoryHeader.map((category_header, index) => (
+            {categoryHeader?.map((category_header, index) => (
               category_header.status === 1 && (
                 <ul key={index} className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-white md:dark:bg-white dark:border-gray-700">
                   <li><Link href="#" className="block py-2 px-3 text-black hover:bg-white md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-black dark:hover:bg-white dark:hover:text-white dark:border-white w-fit uppercase text-center text-xs">{category_header.name}</Link></li>

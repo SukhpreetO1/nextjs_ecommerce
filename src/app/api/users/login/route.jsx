@@ -24,7 +24,7 @@ export async function POST(request) {
 
         const tokenData = {
             id: user._id,
-            name:user.first_name != '' ? user.first_name : '',
+            name:user.first_name !== '' ? user.first_name : '',
             email: user.email,
             role_name: role.name
         }
