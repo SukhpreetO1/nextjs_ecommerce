@@ -1,6 +1,23 @@
 import { NextResponse } from 'next/server';
 import { FORGOT_PASSWORD, LOGIN_URL, SIGNUP_URL, USER_DASHBOARD, HOME_URL, ADMIN_DASHBOARD } from '@/app/api/routes/route';
 
+export const config = {
+  runtime: 'experimental-edge',
+  unstable_allowDynamic: [
+    '/lib/utilities.js',
+    '/node_modules/mongoose/**',
+  ],
+  matcher: [
+    "/",
+    "/login",
+    "/signup",
+    "/forgot_password",
+    "/dashboard",
+    "/admin",
+    "/admin/:path*",
+  ],
+}
+
 export function middleware(request) {
   const path = request.nextUrl.pathname;
 
@@ -31,19 +48,3 @@ export function middleware(request) {
   }
   return NextResponse.next();
 }
-
-// export const config = {
-//   runtime: 'experimental-edge',
-//   unstable_allowDynamic: [
-//     '/lib/utilities.js',
-//     '/node_modules/mongoose/**',
-//   ],
-//   matcher: [
-//     "/login",
-//     "/signup",
-//     "/forgot_password",
-//     "/dashboard",
-//     "/admin",
-//     "/admin/:path*",
-//   ],
-// }
