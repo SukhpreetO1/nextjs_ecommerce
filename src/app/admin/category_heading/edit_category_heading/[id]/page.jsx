@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { ADMIN_CATEGORY_HEADING, ADMIN_DASHBOARD, InputField, Link, MONGODB_CATEGORY_HEADING, SubmitButton, axios, toast, useRouter, validate_category_header } from '@/app/api/routes/route';
 
-const editCategoryHeader = (req) => {
+const EditCategoryHeader = (req) => {
     const router = useRouter();
     const id = req.params.id
     const [formData, setFormData] = useState({name : ''});
@@ -15,7 +15,7 @@ const editCategoryHeader = (req) => {
         setFormData(categoryHeadingData.category_heading)
        }
        fetchData();
-    }, [])
+    }, [id])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -95,4 +95,4 @@ const editCategoryHeader = (req) => {
     )
 }
 
-export default editCategoryHeader
+export default EditCategoryHeader

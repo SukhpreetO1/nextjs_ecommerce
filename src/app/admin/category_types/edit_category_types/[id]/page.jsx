@@ -21,7 +21,7 @@ const EditCategorytypes = (req) => {
             setFormData({ name: categoryTypes.name, category_heading_id: categoryTypes.category_heading_id });
         };
         fetchData();
-    }, []);
+    }, [id]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
