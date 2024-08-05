@@ -27,6 +27,8 @@ import {
   LOGO_IMAGE_URL,
   GOOGLE_LOGO,
   PHONE_NUMBER_LOGO,
+  PRIVACY_POLICIES,
+  TERMS_AND_CONDITION,
   USER_DASHBOARD, 
   ADMIN_DASHBOARD,
   ADMIN_USER_DETAILS,
@@ -57,7 +59,7 @@ import {
   MONGODB_LOGOUT,
 } from "@/app/api/mongodb_api/route";
 
-import Navbar from "@/app/(navbar)/page";
+import Navbar from "@/app/navbar/page";
 
 // firebase import
 import { auth, db } from "@/db/firebase";
@@ -157,6 +159,8 @@ export {
   GOOGLE_LOGO,
   PHONE_NUMBER_LOGO,
   USER_DASHBOARD, 
+  PRIVACY_POLICIES,
+  TERMS_AND_CONDITION,
   ADMIN_DASHBOARD,
   ADMIN_USER_DETAILS,
   ADMIN_CATEGORY_HEADING,
