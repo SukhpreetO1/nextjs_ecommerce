@@ -57,7 +57,7 @@ import {
   MONGODB_LOGOUT,
 } from "@/app/api/mongodb_api/route";
 
-import Navbar from "@/app/(users)/(navbar)/page";
+import Navbar from "@/app/(users)/navbar/page";
 
 // firebase import
 import { auth, db } from "@/db/firebase";
