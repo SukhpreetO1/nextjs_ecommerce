@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react'
-import { FontAwesomeIcon, Link, faShoppingBag, faHeart, faUser, MONGODB_CATEGORY_HEADING, Image, LOGIN_URL, FORGOT_PASSWORD, SIGNUP_URL, usePathname, HOME_URL, MONGODB_LOGGED_USER, MONGODB_LOGOUT, useRouter, toast } from "@/app/api/routes/route";
+import { FontAwesomeIcon, Link, faShoppingBag, faHeart, faUser, MONGODB_CATEGORY_HEADING, Image, LOGIN_URL, FORGOT_PASSWORD, SIGNUP_URL, usePathname, HOME_URL, MONGODB_LOGGED_USER, MONGODB_LOGOUT, useRouter, toast, NAVBAR_LOGO } from "@/app/api/routes/route";
 
 const Navbar = () => {
   const router = useRouter();
@@ -36,7 +36,7 @@ const Navbar = () => {
     <nav className="bg-white border-white dark:bg-white fixed top-0 w-full">
       <div className="flex flex-wrap items-center justify-between mx-auto p-4 px-16">
         <Link href={HOME_URL} className="flex items-center space-x-3 rtl:space-x-reverse">
-          <Image src="https://flowbite.com/docs/images/logo.svg" className="h-8 w-auto" width={0} height={0} alt="Flowbite Logo" />
+          <Image src={NAVBAR_LOGO} className="h-12 w-12" width={50} height={100} alt="Singh Store" />
         </Link>
         <div className="flex md:order-2">
           <div className='hidden lg:block'>
@@ -46,14 +46,16 @@ const Navbar = () => {
               </svg>
             </button>
           </div>
-          <div className="relative hidden xl:block mx-9" style={{ width: "36vw" }}>
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-              <svg className="w-4 h-4 text-gray-200 dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-              </svg>
+          {currentPath === LOGIN_URL || currentPath === FORGOT_PASSWORD || currentPath === SIGNUP_URL ? '' :
+            <div className="relative hidden xl:block mx-9" style={{ width: "36vw" }}>
+              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg className="w-4 h-4 text-gray-200 dark:text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                </svg>
+              </div>
+              <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-black border border-gray-100 rounded-md bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-100 dark:border-gray-800 dark:placeholder-gray-800 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." />
             </div>
-            <input type="text" id="search-navbar" className="block w-full p-2 ps-10 text-sm text-black border border-gray-100 rounded-md bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-100 dark:border-gray-800 dark:placeholder-gray-800 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search..." />
-          </div>
+          }
           <div>
             <button data-collapse-toggle="navbar_search" type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-800 dark:hover:bg-gray-200 dark:focus:ring-gray-500" aria-controls="navbar-search" aria-expanded="false">
               <span className="sr-only">Open main menu</span>

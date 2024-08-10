@@ -10,6 +10,7 @@ import PasswordField from "@/components/PasswordField";
 import RadioButtonField from "@/components/RadioButtonField";
 import SubmitButton from "@/components/SubmitButton";
 import ClientCookieHandler from '@/components/ClientCookieHandler';
+import CustomLoader from "@/components/CustomLoader";
 
 // js validation files
 import { validate_signup_submit_form } from "@/utils/js/signup";
@@ -24,7 +25,7 @@ import {
   LOGIN_URL,
   SIGNUP_URL,
   FORGOT_PASSWORD,
-  LOGO_IMAGE_URL,
+  NAVBAR_LOGO,
   GOOGLE_LOGO,
   PHONE_NUMBER_LOGO,
   PRIVACY_POLICIES,
@@ -144,6 +145,7 @@ export {
   RadioButtonField,
   SubmitButton,
   ClientCookieHandler,
+  CustomLoader,
 
   validate_signup_submit_form,
   validate_login_submit_form,
@@ -155,7 +157,7 @@ export {
   LOGIN_URL,
   SIGNUP_URL,
   FORGOT_PASSWORD,
-  LOGO_IMAGE_URL,
+  NAVBAR_LOGO,
   GOOGLE_LOGO,
   PHONE_NUMBER_LOGO,
   USER_DASHBOARD, 

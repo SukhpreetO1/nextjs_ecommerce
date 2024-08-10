@@ -1,5 +1,5 @@
 "use client";
-import { InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, useRouter, auth, createUserWithEmailAndPassword, axios, MONGODB_API_SIGNUP, MONGODB_ROLE_DATA } from '@/app/api/routes/route';
+import { InputField, DateField, RadioButtonField, CheckboxField, PasswordField, SubmitButton, validate_signup_submit_form, LOGIN_URL, Link, toast, useRouter, auth, createUserWithEmailAndPassword, axios, MONGODB_API_SIGNUP, MONGODB_ROLE_DATA, CustomLoader } from '@/app/api/routes/route';
 import React, { useState } from 'react';
 
 const genderOptions = [
@@ -19,6 +19,7 @@ const hobbiesOptions = [
 const Signup = () => {
     const router = useRouter();
     const [errors, setErrors] = useState({});
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         first_name: '',
         last_name: '',
@@ -52,10 +53,12 @@ const Signup = () => {
     };
 
     const formSubmit = async (e) => {
+        setLoading(true);
         e.preventDefault();
         const validation_errors = validate_signup_submit_form(formData);
 
         if (Object.keys(validation_errors).length > 0) {
+            setLoading(false);
             setErrors(validation_errors);
             return;
         }
@@ -65,9 +68,11 @@ const Signup = () => {
             const role_id = role_response.data._id;
             const response = await axios.post(MONGODB_API_SIGNUP, { ...formData, role_id });
             const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+            setLoading(false);
             router.push(LOGIN_URL);
             toast.success(response.data.message);
         } catch (error) {
+            setLoading(false);
             if (error.code === 'auth/email-already-in-use') {
                 toast.error("Email is already in use. Please choose a different email.");
             } else {
@@ -78,6 +83,7 @@ const Signup = () => {
 
     return (
         <div className="sign_up_form -2/5">
+            {loading && <CustomLoader />}
             <div className="heading font-bold text-center">
                 <h1 className="text-3xl mt-16">Create a new account</h1>
             </div>
