@@ -32,3 +32,7 @@ export const ADMIN_EDIT_CATEGORY_TYPES = "/admin/category_types/edit_category_ty
 export const ADMIN_CATEGORIES = "/admin/categories";
 export const ADMIN_ADD_CATEGORIES = "/admin/categories/add_categories";
 export const ADMIN_EDIT_CATEGORIES = "/admin/categories/edit_categories";
+
+export const USERS_DASHBOARD = "/admin/users_dashboard";
+export const ADMIN_PRIVACY_POLICY = "/admin/privacy_policy";
+export const ADMIN_TERMS_AND_CONDITION = "/admin/terms_and_conditions";
